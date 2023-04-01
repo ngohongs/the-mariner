@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public enum TileType {
+public enum TileType
+{
     Barrel,
-    Current,
+    CurrentDown,
+    CurrentLeft,
+    CurrentRight,
+    CurrentUp,
     Empty,
     Land,
     Shallow,
@@ -14,10 +18,40 @@ public enum TileType {
     Vortex,
 }
 
+public enum TileCode : int
+{
+    Barrel = 'b',
+    CurrentDown = 'd',
+    CurrentLeft = 'l',
+    CurrentRight = 'r',
+    CurrentUp = 'u',
+    Empty = 'e',
+    Land = 'i',
+    Shallow = 's',
+    Shipwreck = 'w',
+    Vortex = 'v',
+}
+
+public static class TileCodeTranslation
+{
+    public static Dictionary<TileCode, TileType> TileCodeToType = new Dictionary<TileCode, TileType>() {
+        {TileCode.Barrel, TileType.Barrel},
+        {TileCode.CurrentDown, TileType.CurrentDown},
+        {TileCode.CurrentLeft, TileType.CurrentLeft},
+        {TileCode.CurrentRight, TileType.CurrentRight},
+        {TileCode.CurrentUp, TileType.CurrentUp},
+        {TileCode.Empty, TileType.Empty},
+        {TileCode.Land, TileType.Land},
+        {TileCode.Shallow, TileType.Shallow},
+        {TileCode.Shipwreck, TileType.Shipwreck},
+        {TileCode.Vortex, TileType.Vortex},
+    };
+}
+
 public abstract class Tile : MonoBehaviour
 {
     public int x = -1, y = -1;
     public abstract bool ApplyEffect(PlayingField field);
 
-    public virtual bool IsMoveable() => true; 
+    public virtual bool IsMoveable() => true;
 }
