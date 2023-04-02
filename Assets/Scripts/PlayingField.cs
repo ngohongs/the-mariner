@@ -110,7 +110,7 @@ public class PlayingField : MonoBehaviour
         Move(coord.x, coord.y);
 
         var tile = TileIn(shipX, shipY);
-        while (IsInPlayingField(shipX, shipY) && tile.ApplyEffect(this))
+        while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY) && tile.ApplyEffect(this))
         {
             tile = TileIn(shipX, shipY);
         }
