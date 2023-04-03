@@ -54,14 +54,15 @@ public class PlayingField : MonoBehaviour
         lineRenderer.startWidth = 0.2f;
         lineRenderer.endWidth = 0.2f;
         lineRenderer.positionCount = 6;
+        var offset = new Vector3(xOffset, 0, yOffset);
         lineRenderer.SetPositions(new Vector3[]
             {
-                new Vector3(0, 0.1f, 0),
-                new Vector3(playingWidth, 0.1f, 0),
-                new Vector3(playingWidth, 0.1f, playingHeight),
-                new Vector3(0, 0.1f, playingHeight),
-                new Vector3(0, 0.1f, 0),
-                new Vector3(playingWidth, 0.1f, 0),
+                new Vector3(0, 0.1f, 0) + offset,
+                new Vector3(playingWidth, 0.1f, 0) + offset,
+                new Vector3(playingWidth, 0.1f, playingHeight) + offset,
+                new Vector3(0, 0.1f, playingHeight) + offset,
+                new Vector3(0, 0.1f, 0) + offset,
+                new Vector3(playingWidth, 0.1f, 0) + offset,
             }
         );
 
@@ -214,12 +215,12 @@ public class PlayingField : MonoBehaviour
 
     private Vector2Int PlayToTileCoords(int x, int y)
     {
-        return new Vector2Int(x - xOffset, y - yOffset + completed);
+        return new Vector2Int(x + xOffset, y + yOffset + completed);
     }
 
     private Vector2Int TileToPlayCoords(int x, int y)
     {
-        return new Vector2Int(x + xOffset, y + yOffset - completed); 
+        return new Vector2Int(x - xOffset, y - yOffset - completed); 
     }
 
     bool IsInPlayingField(int x, int y)
