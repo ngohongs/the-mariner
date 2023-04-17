@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EmptyTile : Tile
 {
-    public override bool ApplyEffect(PlayingField field) 
+    public override bool ApplyEffect(PlayingField field, out bool wait) 
     {
+        wait = false;
         return false; 
     }
 }

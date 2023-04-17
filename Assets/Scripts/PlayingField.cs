@@ -1,8 +1,11 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayingField : MonoBehaviour
 {
@@ -25,10 +28,23 @@ public class PlayingField : MonoBehaviour
 
     [Header("State")]
     public State state = State.Prepare;
+    public enum State { Prepare, Action, Finish };
     public Tile destination = null;
     public int completed = 0;
     public List<Tile> moveSet;
-    public enum State { Prepare, Action, Finish };
+    public Coroutine stateCoroutine = null;
+
+    [Header("State Durations (Action/Finish Duration needs to be equal or larger than Shift Duration and Move Duration)")]
+    public float prepareDuration = 1.0f;
+    public float actionDuration = 1.0f;
+    public float finishDuration = 1.0f;
+
+    [Header("Animations")]
+    public float shiftDuration = 1.0f;
+    public float moveDuration = 1.0f;
+
+    public Stopwatch stopwatch = new Stopwatch();
+    
 
     private void OnDrawGizmos()
     {
@@ -50,6 +66,27 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DrawPlayingFieldBorder();
+
+        if (tilemap)
+        {
+            tilemap.transform.position = Vector3.zero;
+        }
+
+        if (ship)
+        {
+            Move(shipX, shipY, false);
+        }
+
+        if (actionDuration < Mathf.Max(shiftDuration, moveDuration))
+            actionDuration = Mathf.Max(shiftDuration, moveDuration);
+
+        if (finishDuration < Mathf.Max(shiftDuration, moveDuration))
+            finishDuration = Mathf.Max(shiftDuration, moveDuration);
+    }
+
+    private void DrawPlayingFieldBorder()
+    {
         var lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.2f;
         lineRenderer.endWidth = 0.2f;
@@ -65,71 +102,80 @@ public class PlayingField : MonoBehaviour
                 new Vector3(playingWidth, 0.1f, 0) + offset,
             }
         );
-
-        if (tilemap)
-        {
-            tilemap.transform.position = Vector3.zero;
-        }
-
-        if (ship)
-        {
-            Move(shipX, shipY);
-        }
-
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (stateCoroutine != null)
+            return;
+
         switch (state)
         {
-            case State.Prepare: Prepare(); break;
-            case State.Action: Action(); break;
-            case State.Finish: Finish(); break;
+            case State.Prepare: stateCoroutine = StartCoroutine(Prepare()); break;
+            case State.Action: stateCoroutine = StartCoroutine(Action()); break;
+            case State.Finish: stateCoroutine = StartCoroutine(Finish()); break;
             default: Debug.LogError("Non existing state"); break;
         }
     }
 
-    public void Prepare()
-    {
+    private IEnumerator Prepare()
+    {   
+        stopwatch.Restart();
         destination = null;
         UpdateMoveSet();
+
+        while ((destination = GetDestination()) == null)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(prepareDuration);
+
         state = State.Action;
+        stateCoroutine = null;
+        Debug.Log("Prepare over " + stopwatch.ElapsedMilliseconds / 1000);
     }
 
-    public void Action()
+    private IEnumerator Action()
     {
-        destination = GetDestination();
-        
-        if (destination == null)
-            return;
-
         var coord = TileToPlayCoords(destination.x, destination.y);
-        Debug.Log(coord);
 
         Move(coord.x, coord.y);
 
+        yield return new WaitForSeconds(actionDuration);
+
         var tile = TileIn(shipX, shipY);
-        while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY) && tile.ApplyEffect(this))
+        while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY))
         {
+            bool again = tile.ApplyEffect(this, out bool wait);
+
+            if (wait)
+                yield return new WaitForSeconds(actionDuration);
+
+            if (!again)
+                break;
+
             tile = TileIn(shipX, shipY);
         }
 
-
         state = State.Finish;
-
-
+        stateCoroutine = null;
+        Debug.Log("Action over " + stopwatch.ElapsedMilliseconds / 1000);
     }
 
-    public void Finish()
+    private IEnumerator Finish()
     {
         Shift();
+
+        yield return new WaitForSeconds(finishDuration);
 
         if (!IsInPlayingField(shipX, shipY))
             Debug.Log("End");
 
         state = State.Prepare;
+        stateCoroutine = null;
+        Debug.Log("Finish over " + stopwatch.ElapsedMilliseconds / 1000);
     }
 
     public Tile GetDestination()
@@ -160,16 +206,21 @@ public class PlayingField : MonoBehaviour
 
     public void Shift()
     {
-        tilemap.transform.localPosition += new Vector3(0, 0, -1);
+        Debug.Log("Shift " + tilemap.transform.localPosition + " " + stopwatch.ElapsedMilliseconds / 1000 );
+        tilemap.transform.DOLocalMoveZ(tilemap.transform.localPosition.z - 1, shiftDuration);
         Move(shipX, shipY - 1);
         completed++;
     }
 
-    void Move(int x, int y)
+    void Move(int x, int y, bool tween = true)
     {
+        Debug.Log("Move : " + x + " " + y + " " + stopwatch.ElapsedMilliseconds / 1000 );
         shipX = x;
         shipY = y;
-        ship.transform.position = new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset);
+        if (tween)
+            ship.transform.DOMove(new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset), moveDuration);
+        else
+            ship.transform.position = new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset);
     }
 
     public void Move(Direction direction)

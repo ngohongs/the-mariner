@@ -51,7 +51,7 @@ public static class TileCodeTranslation
 public abstract class Tile : MonoBehaviour
 {
     public int x = -1, y = -1;
-    public abstract bool ApplyEffect(PlayingField field);
+    public abstract bool ApplyEffect(PlayingField field, out bool wait);
 
     public virtual bool IsMoveable() => true;
 }

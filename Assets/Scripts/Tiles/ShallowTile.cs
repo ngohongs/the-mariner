@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShallowTile : Tile
 {
-    public override bool ApplyEffect(PlayingField field)
+    public override bool ApplyEffect(PlayingField field, out bool wait)
     {
+        wait = true;
         field.Shift();
         return false;
     }

@@ -729,6 +729,11 @@ MonoBehaviour:
   destination: {fileID: 0}
   completed: 0
   moveSet: []
+  prepareDuration: 1
+  actionDuration: 2
+  finishDuration: 1
+  shiftDuration: 1
+  moveDuration: 1
 --- !u!4 &216498108
 Transform:
   m_ObjectHideFlags: 0
