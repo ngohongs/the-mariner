@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    public int foodStored = 15;
+    public int foodConsumption = 1;
+
     public PlayingField field;
 
     public void Center()
@@ -15,6 +18,27 @@ public class Ship : MonoBehaviour
         transform.position = center;
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
+
+    public void SetFoodConsumption(int consumption)
+    {
+        foodStored = consumption;
+    }
+
+    public void ConsumeFood()
+    {
+        foodStored -= foodConsumption; 
+    }
+
+    public void AddFood(int amount) 
+    {
+        foodStored += amount;
+    }
+
+    public bool NoFood()
+    {
+        return foodStored <= 0;
+    }
+
 }
 
 [CustomEditor(typeof(Ship)), CanEditMultipleObjects]

@@ -130,6 +130,13 @@ public class PlayingField : MonoBehaviour
             yield return null;
         }
 
+        // Add food when resting
+        if (destination == TileIn(shipX, shipY))
+        {
+            ship.AddFood(2);
+            Debug.Log("Resting");
+        }
+
         yield return new WaitForSeconds(prepareDuration);
 
         state = State.Action;
@@ -166,11 +173,12 @@ public class PlayingField : MonoBehaviour
 
     private IEnumerator Finish()
     {
+        ship.ConsumeFood();
         Shift();
 
         yield return new WaitForSeconds(finishDuration);
 
-        if (!IsInPlayingField(shipX, shipY))
+        if (!IsInPlayingField(shipX, shipY) || ship.NoFood())
             Debug.Log("End");
 
         state = State.Prepare;
@@ -249,6 +257,9 @@ public class PlayingField : MonoBehaviour
 
             result.Add(tile);            
         }
+
+        if (shipY == playingHeight - 1 && IsInTilemap(shipX, shipY))
+            result.Add(TileIn(shipX, shipY));
 
         moveSet = result;
     }

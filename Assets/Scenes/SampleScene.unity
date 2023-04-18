@@ -1538,6 +1538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da26d25be06caf4581c289f6ee1f3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodStored: 15
+  foodConsumption: 1
   field: {fileID: 216498107}
 --- !u!1 &504367264
 GameObject:
@@ -2376,6 +2378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 2
   y: 7
+  foodAmount: 8
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4263,6 +4266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 1
   y: 9
+  foodAmount: 8
 --- !u!1 &1350314720
 GameObject:
   m_ObjectHideFlags: 0
@@ -4828,6 +4832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 2
   y: 5
+  foodAmount: 8
 --- !u!1 &1398445525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4941,6 +4946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 5
+  foodAmount: 8
 --- !u!1 &1467013703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5845,6 +5851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 6
+  foodAmount: 8
 --- !u!1 &1988583438
 GameObject:
   m_ObjectHideFlags: 0
