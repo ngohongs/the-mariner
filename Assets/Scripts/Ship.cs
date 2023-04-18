@@ -21,7 +21,7 @@ public class Ship : MonoBehaviour
 
     public void SetFoodConsumption(int consumption)
     {
-        foodStored = consumption;
+        foodConsumption = consumption;
     }
 
     public void ConsumeFood()
