@@ -724,7 +724,7 @@ MonoBehaviour:
   yOffset: 0
   ship: {fileID: 496907352}
   shipX: 2
-  shipY: 2
+  shipY: 4
   state: 0
   destination: {fileID: 0}
   completed: 0

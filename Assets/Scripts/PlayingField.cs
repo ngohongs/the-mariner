@@ -205,6 +205,12 @@ public class PlayingField : MonoBehaviour
                         return tile;
                     }
                 }
+
+                if (shipY == playingHeight - 1 && hit.transform.gameObject.GetComponent<Ship>() != null)
+                {
+                    Debug.Log("Ship");
+                    return TileIn(shipX, shipY);
+                }
             }
         }
 
