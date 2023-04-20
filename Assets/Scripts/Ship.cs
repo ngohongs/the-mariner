@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -8,6 +9,9 @@ public class Ship : MonoBehaviour
     public int foodStored = 15;
     public int foodConsumption = 1;
 
+    private List<Character> characters = new List<Character>( (int) ESkill.COUNT);
+    private List<bool> skills = new List<bool>( (int) ESkill.COUNT);
+    
     public PlayingField field;
 
     public void Center()
@@ -19,6 +23,15 @@ public class Ship : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
+    public void AddCharacter(Character c) {
+        if (!this.skills[(int) c.Skill]) {
+            //TODO: DISPLAY WELCOME MESSAGE
+            
+            this.characters[(int) c.Skill] = c;
+            this.skills[(int)c.Skill] = true;
+        }
+    }
+    
     public void SetFoodConsumption(int consumption)
     {
         foodConsumption = consumption;
