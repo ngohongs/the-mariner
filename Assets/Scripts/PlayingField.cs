@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Debug = UnityEngine.Debug;
 
 public class PlayingField : MonoBehaviour
@@ -45,6 +46,7 @@ public class PlayingField : MonoBehaviour
 
     public Stopwatch stopwatch = new Stopwatch();
     
+    private GameController gameController;
 
     private void OnDrawGizmos()
     {
@@ -66,6 +68,8 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameController = Singleton.instance.GetComponent<GameController>();
+
         DrawPlayingFieldBorder();
 
         if (tilemap)
@@ -155,6 +159,9 @@ public class PlayingField : MonoBehaviour
         var tile = TileIn(shipX, shipY);
         while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY))
         {
+            if (IsShipAtTheEnd())
+                break;
+
             bool again = tile.ApplyEffect(this, out bool wait);
 
             if (wait)
@@ -171,6 +178,11 @@ public class PlayingField : MonoBehaviour
         Debug.Log("Action over " + stopwatch.ElapsedMilliseconds / 1000);
     }
 
+    private bool IsShipAtTheEnd()
+    {
+        return PlayToTileCoords(shipX, shipY).y == tilemap.height - 1;
+    }
+
     private IEnumerator Finish()
     {
         ship.ConsumeFood();
@@ -178,9 +190,17 @@ public class PlayingField : MonoBehaviour
 
         yield return new WaitForSeconds(finishDuration);
 
-        if (!IsInPlayingField(shipX, shipY) || ship.NoFood())
+        if (IsShipAtTheEnd())
+        {
             Debug.Log("End");
+            gameController.NextScene();
+        }
 
+        if (!IsInPlayingField(shipX, shipY) || ship.NoFood())
+        {
+            Debug.Log("End");
+            gameController.Restart();
+        }
         state = State.Prepare;
         stateCoroutine = null;
         Debug.Log("Finish over " + stopwatch.ElapsedMilliseconds / 1000);
@@ -188,6 +208,9 @@ public class PlayingField : MonoBehaviour
 
     public Tile GetDestination()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return null;
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

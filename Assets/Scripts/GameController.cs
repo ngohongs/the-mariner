@@ -45,29 +45,35 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause(bool menuShow = true)
     {
         Time.timeScale = 0.0f;
         paused = true;
-        uIContoller.ShowElement("Pause Menu");
+        if (menuShow)
+        {
+            uIContoller.ShowElement("Pause Menu");
+        }
     }
 
-    private void Unpause()
+    public void Unpause(bool menuShown = true)
     {
         Time.timeScale = 1.0f;
         paused = false;
-        uIContoller.HideElement("Pause Menu");
+        if (menuShown)
+        {
+            uIContoller.HideElement("Pause Menu");
+        }
     }
 
-    public void TogglePause()
+    public void TogglePause(bool showMenu = true)
     {
         if (paused)
         {
-            Unpause();
+            Unpause(showMenu);
         }
         else
         {
-            Pause();
+            Pause(showMenu);
         }
     }
 

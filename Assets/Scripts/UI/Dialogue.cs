@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Dialogue : MonoBehaviour
 {
@@ -9,10 +10,11 @@ public class Dialogue : MonoBehaviour
     public List<string> lines = new List<string>();
     public float textSpeed = 1.0f;
     private int index = 0;
-
+    private GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
+        gameController = Singleton.instance.gameObject.GetComponent<GameController>();
         textCompoment.text = "";
         StartDialogue();
     }
@@ -20,6 +22,8 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Time.timeScale = 0.0f;
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (textCompoment.text == lines[index])
@@ -45,7 +49,7 @@ public class Dialogue : MonoBehaviour
         foreach (char letter in lines[index].ToCharArray())
         {
             textCompoment.text += letter;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
 
@@ -60,6 +64,14 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
         }
+    }
+
+    public void DisplayText(string text)
+    {
+        lines = new List<string>(text.Split(Environment.NewLine, StringSplitOptions.None));
+        gameObject.SetActive(true);
+        StartDialogue();
     }
 }
