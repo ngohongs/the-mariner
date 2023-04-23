@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,10 +10,14 @@ public class Ship : MonoBehaviour
     public int foodStored = 15;
     public int foodConsumption = 1;
 
-    private List<Character> characters = new List<Character>( (int) ESkill.COUNT);
-    private List<bool> skills = new List<bool>( (int) ESkill.COUNT);
+    private Character[] characters = new Character[(int) ESkill.COUNT];
+    public bool[] skills = new bool[(int) ESkill.COUNT];
     
     public PlayingField field;
+
+    private void Awake() {
+        skills[(int)ESkill.STREAM_SKIP] = true;
+    }
 
     public void Center()
     {

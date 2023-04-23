@@ -6,11 +6,15 @@ using UnityEngine.UIElements;
 
 public class CurrentTile : Tile
 {
-    public override bool ApplyEffect(PlayingField field, out bool wait)
-    {
-        wait = true;
-        field.Move(GetDirection());
+    public override bool ApplyEffect(PlayingField field, out bool wait) {
         field.tilemap.Replace(x, y, TileType.Empty);
+        if (field.ship.skills[(int)ESkill.STREAM_SKIP]) {
+            wait = false;
+            return false;
+        }
+        
+        field.Move(GetDirection());
+        wait = true;
         return true;
     }
 
