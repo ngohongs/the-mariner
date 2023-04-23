@@ -12,7 +12,7 @@ public class Ship : MonoBehaviour
 
     public void Center()
     {
-        var center = new Vector3(field.playingWidth / 2 + field.xOffset + 0.5f, 0, field.playingHeight / 2 + field.yOffset + 0.5f);
+        var center = new Vector3(field.shipX + field.xOffset + 0.5f, 0, field.shipY + field.yOffset + 0.5f);
         center += field.transform.position;
 
         transform.position = center;
