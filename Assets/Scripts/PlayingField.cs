@@ -45,7 +45,7 @@ public class PlayingField : MonoBehaviour
     public float moveDuration = 1.0f;
 
     public Stopwatch stopwatch = new Stopwatch();
-    
+
     private GameController gameController;
 
     private void OnDrawGizmos()
@@ -68,19 +68,13 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEngine.Object gameControllerObject = GameController.instance;
-        if (gameController == null)
+        if (GameController.instance == null)
         {
             var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
             var instance = Instantiate(gameControllerPrefab);
-            instance.name = "Game Manager";
+            instance.name = "Game Manager";         
             gameController = GameController.instance.GetComponent<GameController>();          
         }
-        else
-        {
-            gameController = (gameControllerObject as GameObject).GetComponent<GameController>();
-        }
-        gameController.uIContoller.HideAllElemenets();
 
         DrawPlayingFieldBorder();
 
@@ -219,13 +213,13 @@ public class PlayingField : MonoBehaviour
         if (IsShipAtTheEnd())
         {
             Debug.Log("End");
-            gameController.NextScene();
+            GameController.instance.NextScene();
         }
 
         if (!IsInPlayingField(shipX, shipY) || ship.NoFood())
         {
             Debug.Log("End");
-            gameController.Restart();
+            GameController.instance.Restart();
         }
         state = State.Prepare;
         stateCoroutine = null;

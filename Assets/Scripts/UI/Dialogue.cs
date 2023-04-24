@@ -11,13 +11,7 @@ public class Dialogue : MonoBehaviour
     public List<string> lines = new List<string>();
     public float textSpeed = 1.0f;
     public int index = 0;
-    private GameController gameController;
     public GameObject pauseMenu;
-    // Start is called before the first frame update
-    void Awake()
-    {  
-        gameController = GameController.instance.gameObject.GetComponent<GameController>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -50,7 +44,7 @@ public class Dialogue : MonoBehaviour
     {
         foreach (char letter in lines[index].ToCharArray())
         {
-            while (gameController.paused)
+            while (GameController.instance.paused)
             {
                 yield return null;
             }

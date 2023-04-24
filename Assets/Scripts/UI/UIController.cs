@@ -2,55 +2,60 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    [Serializable]
-    public struct UIElement
-    {
-        public string name;
-        public GameObject element;
-    }
-
-    public List<UIElement> uIElements;
-
     public void ShowElement(string name)
     {
-        var element = uIElements.FirstOrDefault(e => e.name == name);
-        if (element.element != null)
+        GameObject element = GetUIElement(name);
+        if (element != null)
         {
-            element.element.SetActive(true);
+            element.SetActive(true);
         }
     }
 
     public void HideElement(string name)
     {
-        var element = uIElements.FirstOrDefault(e => e.name == name);
-        if (element.element != null)
+        GameObject element = GetUIElement(name);
+        if (element != null)
         {
-            element.element.SetActive(false);
+            element.SetActive(false);
         }
     }   
 
     public void HideAllElemenets()
     {
-        foreach (var element in uIElements)
+        Transform canvas = transform.GetChild(0);
+        for (int i = 0; i < canvas.childCount; i++)
         {
-            if (element.element != null)
+            canvas.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
+    public GameObject GetUIElement(string name)
+    {
+        GameObject element = null;
+        Transform canvas = transform.GetChild(0);
+        for (int i = 0; i < canvas.childCount; i++)
+        {
+            var child = canvas.transform.GetChild(i);
+            if (child.name == name)
             {
-                element.element.SetActive(false);
+                element = child.gameObject;
+                break;
             }
         }
+        return element;
     }
 
     public void DisplayDialogueText(string text)
     {
-        var element = uIElements.FirstOrDefault(e => e.name == "Dialogue Box");
-        Debug.Log("search " + element.name);
-        if (element.element != null)
+        var element = GetUIElement("Dialogue Box");
+        if (element != null)
         {
-            element.element.GetComponent<Dialogue>().DisplayText(text);
+            element.GetComponent<Dialogue>().DisplayText(text);
         }
     }
 }

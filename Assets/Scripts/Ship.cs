@@ -2,13 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using TMPro;
 
 public class Ship : MonoBehaviour
 {
-    public int foodStored = 15;
+    private int _foodStored = 15;
+    public int foodStored
+    {
+        get
+        {
+            return _foodStored;
+        }
+        set
+        {
+            _foodStored = value;
+            if (foodUI != null)
+            {
+                foodUI.text = foodStored.ToString();
+            }
+        }
+    }
+
     public int foodConsumption = 1;
 
     public PlayingField field;
+
+    public TextMeshProUGUI foodUI;
 
     public void Center()
     {
@@ -39,6 +58,14 @@ public class Ship : MonoBehaviour
         return foodStored <= 0;
     }
 
+    private void Start()
+    {
+        foodUI = GameController.instance.uIContoller.GetUIElement("Food").GetComponent<TextMeshProUGUI>();
+        if (foodUI != null)
+        {
+            foodUI.text = foodStored.ToString();
+        }
+    }
 }
 
 [CustomEditor(typeof(Ship)), CanEditMultipleObjects]

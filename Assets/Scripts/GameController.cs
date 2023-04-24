@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -60,7 +61,39 @@ public class GameController : MonoBehaviour
                 break;
             }
         }
+        ShowUI();
+    }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ShowUI();
+    }
+
+    private void ShowUI()
+    {
+        uIContoller.HideAllElemenets();
+        if (sceneIndex == 0)
+        {
+            uIContoller.ShowElement("Main Menu");
+        }
+        else
+        {
+            uIContoller.HideElement("Main Menu");
+        }
+        if (sceneIndex == 1)
+        {
+            string tutorial = Resources.Load<TextAsset>("Texts/Tutorial").text;
+            uIContoller.DisplayDialogueText(tutorial);
+        }
+        if (sceneIndex != 0)
+        {
+            uIContoller.ShowElement("Food");
+        }
     }
 
     private void Update()
