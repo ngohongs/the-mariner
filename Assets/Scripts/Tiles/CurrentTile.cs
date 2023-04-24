@@ -6,6 +6,11 @@ using UnityEngine.UIElements;
 
 public class CurrentTile : Tile
 {
+    private void Awake()
+    {
+        tileType = TileTypeShort.Current;
+    }
+
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
         wait = true;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class LandTile : Tile
 {
+    void Awake()
+    {
+        tileType = TileTypeShort.Land;
+    }
+
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
         wait = false;

@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController instance;
     [Header("Scenes")]
     public int sceneIndex = 0;
     public List<Object> sceneList = new List<Object>();
 
     [Header("UI")]
     public UIController uIContoller;
-    
-    private bool paused = false;
+    public bool paused = false;
     public void Quit()
     {
         Application.Quit();
@@ -35,6 +35,32 @@ public class GameController : MonoBehaviour
         {
             uIContoller.HideElement("Main Menu");
         }
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        var sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            var buildSceneName = System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i));
+            if (buildSceneName == sceneName)
+            {
+                sceneIndex = i;
+                break;
+            }
+        }
+
     }
 
     private void Update()

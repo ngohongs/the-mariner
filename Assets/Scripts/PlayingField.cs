@@ -68,7 +68,19 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameController = Singleton.instance.GetComponent<GameController>();
+        UnityEngine.Object gameControllerObject = GameController.instance;
+        if (gameController == null)
+        {
+            var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
+            var instance = Instantiate(gameControllerPrefab);
+            instance.name = "Game Manager";
+            gameController = GameController.instance.GetComponent<GameController>();          
+        }
+        else
+        {
+            gameController = (gameControllerObject as GameObject).GetComponent<GameController>();
+        }
+        gameController.uIContoller.HideAllElemenets();
 
         DrawPlayingFieldBorder();
 
@@ -134,6 +146,19 @@ public class PlayingField : MonoBehaviour
             yield return null;
         }
 
+        // Click on a new tile
+        Memory.instance.Remember(destination.tileType);
+        
+
+        // Click on a tile that is not in the move set
+        while (!moveSet.Contains(destination))
+        {
+            destination = null;
+            StopCoroutine(stateCoroutine);
+            stateCoroutine = null;
+            yield return null;
+        }
+
         // Add food when resting
         if (destination == TileIn(shipX, shipY))
         {
@@ -171,6 +196,7 @@ public class PlayingField : MonoBehaviour
                 break;
 
             tile = TileIn(shipX, shipY);
+            Memory.instance.Remember(tile.tileType);
         }
 
         state = State.Finish;
@@ -222,16 +248,11 @@ public class PlayingField : MonoBehaviour
 
                 if (tile != null)
                 {
-                    if (moveSet.Contains(tile))
-                    {
-                        Debug.Log(hit.transform.gameObject.name);
-                        return tile;
-                    }
+                    return tile;
                 }
 
                 if (shipY == playingHeight - 1 && hit.transform.gameObject.GetComponent<Ship>() != null)
                 {
-                    Debug.Log("Ship");
                     return TileIn(shipX, shipY);
                 }
             }
@@ -325,5 +346,10 @@ public class PlayingField : MonoBehaviour
         var coord = PlayToTileCoords(x, y);
         return 0 <= coord.x && coord.x < tilemap.width &&
                0 <= coord.y && coord.y < tilemap.height;
+    }
+
+    TileTypeShort TileTypeIn(int x, int y)
+    {
+        return TileIn(x, y).tileType;
     }
 }

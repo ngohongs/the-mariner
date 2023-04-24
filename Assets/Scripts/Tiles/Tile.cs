@@ -18,6 +18,17 @@ public enum TileType
     Vortex,
 }
 
+public enum TileTypeShort 
+{
+    Barrel,
+    Current,
+    Empty,
+    Land,
+    Shallow,
+    Shipwreck,
+    Vortex,
+}
+
 public enum TileCode : int
 {
     Barrel = 'b',
@@ -50,6 +61,7 @@ public static class TileCodeTranslation
 
 public abstract class Tile : MonoBehaviour
 {
+    public TileTypeShort tileType;
     public int x = -1, y = -1;
     public abstract bool ApplyEffect(PlayingField field, out bool wait);
 

@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    private GameController gameController;
-
     [Serializable]
     public struct UIElement
     {
@@ -16,11 +14,6 @@ public class UIController : MonoBehaviour
     }
 
     public List<UIElement> uIElements;
-
-    private void Start()
-    {
-        gameController = Singleton.instance.gameObject.GetComponent<GameController>();
-    }
 
     public void ShowElement(string name)
     {
@@ -53,7 +46,8 @@ public class UIController : MonoBehaviour
 
     public void DisplayDialogueText(string text)
     {
-        var element = uIElements.FirstOrDefault(e => e.name == "Dialogue");
+        var element = uIElements.FirstOrDefault(e => e.name == "Dialogue Box");
+        Debug.Log("search " + element.name);
         if (element.element != null)
         {
             element.element.GetComponent<Dialogue>().DisplayText(text);
