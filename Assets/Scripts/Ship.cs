@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using TMPro;
@@ -25,7 +27,11 @@ public class Ship : MonoBehaviour
 
     public int foodConsumption = 1;
 
+    private Character[] characters = new Character[(int) ESkill.COUNT];
+    public bool[] skills = new bool[(int) ESkill.COUNT];
+    
     public PlayingField field;
+    
 
     public TextMeshProUGUI foodUI;
 
@@ -38,6 +44,19 @@ public class Ship : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
+    public void AddCharacter(Character c) {
+        if (!this.skills[(int) c.Skill]) {
+            //TODO: DISPLAY WELCOME MESSAGE
+            
+            this.characters[(int) c.Skill] = c;
+            this.skills[(int) c.Skill] = true;
+        }
+    }
+
+    public bool HasCharacter(Character c) {
+        return this.skills[(int)c.Skill];
+    }
+    
     public void SetFoodConsumption(int consumption)
     {
         foodConsumption = consumption;

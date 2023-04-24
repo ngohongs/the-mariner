@@ -16,6 +16,14 @@ public class CurrentTile : Tile
         wait = true;
         field.Move(GetDirection());
         field.tilemap.Replace(x, y, TileType.Empty);
+        if (field.ship.skills[(int)ESkill.STREAM_SKIP]) {
+            Debug.Log("FJAKLSJDFKLADJKLADJKL");
+            wait = false;
+            return false;
+        }
+        
+        field.Move(GetDirection());
+        wait = true;
         return true;
     }
 

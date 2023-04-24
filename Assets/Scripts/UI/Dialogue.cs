@@ -74,10 +74,6 @@ public class Dialogue : MonoBehaviour
     {
         GameController.instance.uIContoller.ShowElement("Screen");
         lines = new List<string>(text.Split(new []{ Environment.NewLine, "\n"}, StringSplitOptions.None));
-        foreach (string line in lines)
-        {
-            Debug.Log(line);
-        }   
         gameObject.SetActive(true);
         StartDialogue();
     }

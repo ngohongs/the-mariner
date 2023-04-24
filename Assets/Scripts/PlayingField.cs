@@ -176,6 +176,7 @@ public class PlayingField : MonoBehaviour
         yield return new WaitForSeconds(actionDuration);
 
         var tile = TileIn(shipX, shipY);
+        
         while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY))
         {
             if (IsShipAtTheEnd())
