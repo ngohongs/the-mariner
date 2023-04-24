@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class ShallowTile : Tile
 {
-    void Awake()
-    {
-        tileType = TileTypeShort.Shallow;
-    }
-
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
         wait = true;

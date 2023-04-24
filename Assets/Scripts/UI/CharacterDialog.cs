@@ -23,7 +23,7 @@ public class CharacterDialog : MonoBehaviour {
     }
 
     private void OnEnable() {
-
+        _ship = GameObject.Find("Ship").GetComponent<Ship>();
         DialogManager.onShipwreckStep += Show;
     }
 
