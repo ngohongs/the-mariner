@@ -14,10 +14,7 @@ public class Ship : MonoBehaviour
     public bool[] skills = new bool[(int) ESkill.COUNT];
     
     public PlayingField field;
-
-    private void Awake() {
-        skills[(int)ESkill.STREAM_SKIP] = true;
-    }
+    
 
     public void Center()
     {
@@ -35,6 +32,10 @@ public class Ship : MonoBehaviour
             this.characters[(int) c.Skill] = c;
             this.skills[(int)c.Skill] = true;
         }
+    }
+
+    public bool HasCharacter(Character c) {
+        return this.skills[(int)c.Skill];
     }
     
     public void SetFoodConsumption(int consumption)

@@ -28,7 +28,7 @@ public class Character {
     }
 
     private String _name;
-    private String Name { 
+    public String Name { 
         get => _name;
     }
 
@@ -37,7 +37,7 @@ public class Character {
         get => _description;
     }
     //TODO: Image
-    private List<String> _messages = new List<String>((int) EMessage.COUNT);
+    private String[] _messages = new String[(int) EMessage.COUNT];
 
     public String Message(EMessage msg) {
         return this._messages[(int)msg];

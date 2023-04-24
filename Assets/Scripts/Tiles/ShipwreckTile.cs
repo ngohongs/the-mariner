@@ -5,10 +5,11 @@ using UnityEngine;
 public class ShipwreckTile : Tile
 {
     //TODO: Character specific shipwreck
-   
     
-    public override bool ApplyEffect(PlayingField field, out bool wait)
-    {
+    
+    public override bool ApplyEffect(PlayingField field, out bool wait) {
+        DialogManager.TriggerShipwreckStep();
+        field.tilemap.Replace(x, y, TileType.Empty);
         wait = false;
         return false;
     }
