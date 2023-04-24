@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class VortexTile : Tile
 {
+    private void Awake()
+    {
+        tileType = TileTypeShort.Vortex;
+    }
+
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
         wait = true;

@@ -6,6 +6,11 @@ public class BarrelTile : Tile
 {
     public int foodAmount = 8;
 
+    private void Awake()
+    {
+        tileType = TileTypeShort.Barrel;
+    }
+
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
         
