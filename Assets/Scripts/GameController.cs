@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
     [Header("Scenes")]
     public int sceneIndex = 0;
+    [Header("NEED TO BE IN SAME ORDER AS IN BUILD SETTINGS")]
     public List<Object> sceneList = new List<Object>();
 
     [Header("UI")]
@@ -22,19 +22,8 @@ public class GameController : MonoBehaviour
 
     public void NextScene()
     {
-        if (sceneIndex == 0)
-        {
-            uIContoller.ShowElement("Main Menu");
-        }
-
-        SceneManager.UnloadSceneAsync(sceneList[sceneIndex].name);
         sceneIndex = (sceneIndex + 1) % sceneList.Count;
         SceneManager.LoadScene(sceneList[sceneIndex].name);
-
-        if (sceneIndex == 1)
-        {
-            uIContoller.HideElement("Main Menu");
-        }
     }
 
     private void Awake()
@@ -50,17 +39,8 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        var sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
-        for (int i = 0; i < sceneCount; i++)
-        {
-            var buildSceneName = System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i));
-            if (buildSceneName == sceneName)
-            {
-                sceneIndex = i;
-                break;
-            }
-        }
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
         ShowUI();
     }
 

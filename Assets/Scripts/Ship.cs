@@ -87,6 +87,8 @@ public class Ship : MonoBehaviour
     }
 }
 
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(Ship)), CanEditMultipleObjects]
 public class ShipInspector : Editor
 {
@@ -105,3 +107,4 @@ public class ShipInspector : Editor
         }
     }
 }
+#endif

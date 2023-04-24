@@ -205,6 +205,8 @@ public class Tilemap : MonoBehaviour
     }
 }
 
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(Tilemap))]
 public class TilemapInspector : Editor
 {
@@ -237,3 +239,4 @@ public class TilemapInspector : Editor
         }
     }
 }
+#endif

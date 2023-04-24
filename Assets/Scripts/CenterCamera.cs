@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class CenterCamera : MonoBehaviour
 {
@@ -25,6 +24,7 @@ public class CenterCamera : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(CenterCamera)), CanEditMultipleObjects]
 public class CenterCameraInspector : Editor
 {
@@ -43,3 +43,4 @@ public class CenterCameraInspector : Editor
         }
     }
 }
+#endif
