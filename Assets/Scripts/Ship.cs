@@ -30,7 +30,7 @@ public class Ship : MonoBehaviour
             //TODO: DISPLAY WELCOME MESSAGE
             
             this.characters[(int) c.Skill] = c;
-            this.skills[(int)c.Skill] = true;
+            this.skills[(int) c.Skill] = true;
         }
     }
 

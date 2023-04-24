@@ -21,7 +21,17 @@ public class CharacterDialog : MonoBehaviour {
         this.transform.gameObject.SetActive(false);
         Debug.Log("dwd");
     }
-    private void Awake() {
+
+    private void OnEnable() {
+
+        DialogManager.onShipwreckStep += Show;
+    }
+
+    public void Show() {
+        foreach (Transform child in _layoutGroup.transform) {
+           Destroy(child.gameObject);
+        }
+        
         foreach (var c in Character._allCharacters) {
             if (!_ship.HasCharacter(c)) {
                 var newButton = Instantiate(_descriptionPrefab, _layoutGroup.transform);
