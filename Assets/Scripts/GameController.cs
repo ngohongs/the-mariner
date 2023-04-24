@@ -9,8 +9,6 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     [Header("Scenes")]
     public int sceneIndex = 0;
-    [Header("NEED TO BE IN SAME ORDER AS IN BUILD SETTINGS")]
-    public List<Object> sceneList = new List<Object>();
 
     [Header("UI")]
     public UIController uIContoller;
@@ -22,8 +20,8 @@ public class GameController : MonoBehaviour
 
     public void NextScene()
     {
-        sceneIndex = (sceneIndex + 1) % sceneList.Count;
-        SceneManager.LoadScene(sceneList[sceneIndex].name);
+        sceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
+        SceneManager.LoadScene(sceneIndex);
     }
 
     private void Awake()
@@ -119,7 +117,7 @@ public class GameController : MonoBehaviour
     public void Restart()
     {
         sceneIndex = 0;
-        SceneManager.LoadScene(sceneList[sceneIndex].name);
+        SceneManager.LoadScene(sceneIndex);
         uIContoller.HideAllElemenets();
         uIContoller.ShowElement("Main Menu");
         Unpause();

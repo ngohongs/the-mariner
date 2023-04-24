@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525d3d92b39bed545b1f1c50bc894c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 7
 --- !u!1 &36291893
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525d3d92b39bed545b1f1c50bc894c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 5
 --- !u!1 &79076875
@@ -460,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 7
 --- !u!1 &103083585
@@ -573,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798b2fefdcf2a64bb5a18a4ce2c08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 6
 --- !u!1 &152540239
@@ -686,6 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 1
 --- !u!1 &216498106
@@ -731,9 +736,9 @@ MonoBehaviour:
   moveSet: []
   prepareDuration: 0
   actionDuration: 1
-  finishDuration: 0.2
-  shiftDuration: 0.2
-  moveDuration: 0.2
+  finishDuration: 0.5
+  shiftDuration: 0.5
+  moveDuration: 0.5
 --- !u!4 &216498108
 Transform:
   m_ObjectHideFlags: 0
@@ -861,6 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 4
 --- !u!1 &285219156
@@ -974,6 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5813c46594003b642803b550423c7c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 8
 --- !u!1 &292290883
@@ -1087,6 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525d3d92b39bed545b1f1c50bc894c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 4
 --- !u!1 &362772059
@@ -1200,6 +1208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 8
 --- !u!1 &371186280
@@ -1313,6 +1322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 4
 --- !u!1 &438566620
@@ -1426,6 +1436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798b2fefdcf2a64bb5a18a4ce2c08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 1
 --- !u!1 &496907347
@@ -1538,9 +1549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da26d25be06caf4581c289f6ee1f3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodStored: 15
   foodConsumption: 1
+  skills: 0000
   field: {fileID: 216498107}
+  foodUI: {fileID: 0}
 --- !u!1 &504367264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,6 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 4
 --- !u!1 &544525388
@@ -1765,6 +1778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 3
 --- !u!1 &634598018
@@ -1878,6 +1892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 2
 --- !u!1 &650463841
@@ -2150,6 +2165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 1
 --- !u!1 &671510539
@@ -2263,6 +2279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 3
 --- !u!1 &679107703
@@ -2376,6 +2393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d8c307c576eb34b9af73c3909b410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 7
   foodAmount: 8
@@ -2584,6 +2602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525d3d92b39bed545b1f1c50bc894c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 9
 --- !u!1 &773251051
@@ -2697,6 +2716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 2
 --- !u!1 &911375944
@@ -2810,6 +2830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798b2fefdcf2a64bb5a18a4ce2c08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 6
 --- !u!1 &920752010
@@ -2923,6 +2944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798b2fefdcf2a64bb5a18a4ce2c08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 6
 --- !u!1 &948802727
@@ -3036,6 +3058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5813c46594003b642803b550423c7c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 1
 --- !u!1 &963194225
@@ -3247,6 +3270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 7
 --- !u!1 &1025661012
@@ -3360,6 +3384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525d3d92b39bed545b1f1c50bc894c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 2
 --- !u!1 &1037912180
@@ -3473,6 +3498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 0
 --- !u!1 &1046107575
@@ -3586,6 +3612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 0
 --- !u!1 &1053723512
@@ -3699,6 +3726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525d3d92b39bed545b1f1c50bc894c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 2
 --- !u!1 &1172629690
@@ -3812,6 +3840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 9
 --- !u!1 &1221624740
@@ -3925,6 +3954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 3
 --- !u!1 &1274044829
@@ -4038,6 +4068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 7
 --- !u!1 &1283652489
@@ -4151,6 +4182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 6
 --- !u!1 &1301860129
@@ -4264,6 +4296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d8c307c576eb34b9af73c3909b410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 9
   foodAmount: 8
@@ -4378,6 +4411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 1
 --- !u!1 &1365485336
@@ -4491,6 +4525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 3
 --- !u!1 &1374278281
@@ -4525,6 +4560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 9
 --- !u!64 &1374278283
@@ -4717,6 +4753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 9
 --- !u!1 &1392697512
@@ -4830,6 +4867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d8c307c576eb34b9af73c3909b410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 5
   foodAmount: 8
@@ -4944,6 +4982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d8c307c576eb34b9af73c3909b410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 5
   foodAmount: 8
@@ -5058,6 +5097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798b2fefdcf2a64bb5a18a4ce2c08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 4
   y: 5
 --- !u!1 &1523825770
@@ -5171,6 +5211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 4
 --- !u!1 &1604755135
@@ -5284,6 +5325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 0
 --- !u!1 &1652684374
@@ -5397,6 +5439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 2
 --- !u!1 &1686569628
@@ -5510,6 +5553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798b2fefdcf2a64bb5a18a4ce2c08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 3
 --- !u!1 &1762866400
@@ -5623,6 +5667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5813c46594003b642803b550423c7c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 0
 --- !u!1 &1789320424
@@ -5736,6 +5781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d20760246d004f81c894d74f717d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 0
 --- !u!1 &1834452408
@@ -5849,6 +5895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d8c307c576eb34b9af73c3909b410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 0
   y: 6
   foodAmount: 8
@@ -5963,6 +6010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ce09be6d886a64292c87faa79500a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 5
 --- !u!1 &2010971498
@@ -6076,6 +6124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5813c46594003b642803b550423c7c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 3
   y: 8
 --- !u!1 &2083968375
@@ -6189,6 +6238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 2
   y: 8
 --- !u!1 &2135135561
@@ -6302,5 +6352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e343901fc235d41a494ee8c0058966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 0
   x: 1
   y: 8
