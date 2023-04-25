@@ -191,6 +191,10 @@ public class PlayingField : MonoBehaviour
                 break;
 
             tile = TileIn(shipX, shipY);
+
+            if (tile == null)
+                break;
+
             Memory.instance.Remember(tile.tileType);
         }
 

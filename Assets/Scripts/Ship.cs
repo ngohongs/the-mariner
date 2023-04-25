@@ -9,6 +9,7 @@ using TMPro;
 public class Ship : MonoBehaviour
 {
     private int _foodStored = 15;
+    public int initialFoodAmount = 30;
     public int foodStored
     {
         get
@@ -21,6 +22,10 @@ public class Ship : MonoBehaviour
             if (foodUI != null)
             {
                 foodUI.text = foodStored.ToString();
+            }
+            else
+            {
+                foodUI = GameController.instance.uIContoller.GetUIElement("Food").GetComponent<TextMeshProUGUI>();
             }
         }
     }
@@ -79,6 +84,7 @@ public class Ship : MonoBehaviour
 
     private void Start()
     {
+        foodStored = initialFoodAmount;
         foodUI = GameController.instance.uIContoller.GetUIElement("Food").GetComponent<TextMeshProUGUI>();
         if (foodUI != null)
         {
