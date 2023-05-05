@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
         if (sceneIndex == 1)
         {
             string tutorial = Resources.Load<TextAsset>("Texts/Tutorial").text;
-            uIContoller.DisplayDialogueText(tutorial);
+            // uIContoller.DisplayDialogueText(tutorial);
         }
         if (sceneIndex != 0)
         {

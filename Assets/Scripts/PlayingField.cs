@@ -83,6 +83,24 @@ public class PlayingField : MonoBehaviour
             tilemap.transform.position = Vector3.zero;
         }
 
+        foreach (var tile in tilemap.map)
+        {
+            tile.gameObject.SetActive(false);
+        }
+
+        for (int x = 0; x < playingWidth; x++)
+        {
+            for (int y = 0; y < playingHeight + 1; y++)
+            {
+                var tile = TileIn(x, y);
+                if (tile)
+                {
+                    tile.gameObject.SetActive(true);
+                }
+            }
+        }
+
+
         if (ship)
         {
             Move(shipX, shipY, false);
@@ -263,9 +281,25 @@ public class PlayingField : MonoBehaviour
 
     public void Shift()
     {
+        var drop = 3;
         Debug.Log("Shift " + tilemap.transform.localPosition + " " + stopwatch.ElapsedMilliseconds / 1000 );
         tilemap.transform.DOLocalMoveZ(tilemap.transform.localPosition.z - 1, shiftDuration);
         Move(shipX, shipY - 1);
+        for (int x = 0; x < tilemap.width; x++)
+        {        
+            var tile = TileIn(x, 0);
+            tile.transform.DOLocalMoveY(-drop, shiftDuration).OnComplete(() => tile.gameObject.SetActive(false));
+        }
+        for (int x = 0; x < tilemap.width; x++)
+        {
+            var tile = TileIn(x, playingHeight + 1);
+            
+            if (tile == null)
+                continue;
+
+            tile.gameObject.SetActive(true);
+            tile.transform.DOLocalMoveY(0, shiftDuration).From(drop);
+        }
         completed++;
     }
 
