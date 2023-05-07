@@ -281,7 +281,7 @@ public class PlayingField : MonoBehaviour
 
     public void Shift()
     {
-        var drop = 3;
+        var drop = 5;
         Debug.Log("Shift " + tilemap.transform.localPosition + " " + stopwatch.ElapsedMilliseconds / 1000 );
         tilemap.transform.DOLocalMoveZ(tilemap.transform.localPosition.z - 1, shiftDuration);
         Move(shipX, shipY - 1);
@@ -306,12 +306,32 @@ public class PlayingField : MonoBehaviour
     void Move(int x, int y, bool tween = true)
     {
         Debug.Log("Move : " + x + " " + y + " " + stopwatch.ElapsedMilliseconds / 1000 );
-        shipX = x;
-        shipY = y;
+
         if (tween)
-            ship.transform.DOMove(new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset), moveDuration);
+        {
+            //ship.transform.DOMove(new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset), moveDuration);
+            ship.transform.DOMoveX(x + 0.5f + xOffset, moveDuration);
+            ship.transform.DOMoveZ(y + 0.5f + yOffset, moveDuration);
+
+            if (y >= shipY)
+            {
+                var forward = new Vector2(0, 1);
+                var dest = new Vector2(x - shipX, y - shipY);
+                var angle = -Vector2.SignedAngle(forward, dest);
+
+
+                var sequence = DOTween.Sequence();
+                sequence.Append(ship.transform.DORotate(new Vector3(0, angle, 0), moveDuration / 2).SetEase(Ease.OutSine));
+                sequence.Append(ship.transform.DORotate(Vector3.zero, moveDuration / 2).SetEase(Ease.InSine));
+            }
+
+        }
+   
         else
             ship.transform.position = new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset);
+
+        shipX = x;
+        shipY = y;
     }
 
     public void Move(Direction direction)
@@ -358,7 +378,7 @@ public class PlayingField : MonoBehaviour
         return tilemap.At(tileCoord.x, tileCoord.y);
     }
 
-    private Vector2Int PlayToTileCoords(int x, int y)
+    public Vector2Int PlayToTileCoords(int x, int y)
     {
         return new Vector2Int(x + xOffset, y + yOffset + completed);
     }

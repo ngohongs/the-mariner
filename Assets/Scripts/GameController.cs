@@ -1,3 +1,4 @@
+using DG.Tweening;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour
 
     public void NextScene()
     {
+        DOTween.KillAll();
         sceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
         SceneManager.LoadScene(sceneIndex);
     }

@@ -1,7 +1,9 @@
+using DG.Tweening;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Waves : MonoBehaviour
@@ -19,16 +21,19 @@ public class Waves : MonoBehaviour
 
     private PlayingField playingField;
     private Tilemap tilemap;
+    private Ship ship;
 
     private void Awake()
     {
         playingField = GetComponent<PlayingField>();
         tilemap = playingField.tilemap;
+        ship = playingField.ship;
     }
 
     // Update is called once per frame
     void Update()
     {
+        var shipPosition = playingField.PlayToTileCoords(playingField.shipX, playingField.shipY);
         for (int x = 0; x < tilemap.width; x++)
         {
             for (int y = 0; y < tilemap.height; y++)
@@ -50,6 +55,12 @@ public class Waves : MonoBehaviour
                 var position = tilemap.map[tilemap.Index(x, y)].transform.position;
                 position.y = height;
                 tilemap.map[tilemap.Index(x, y)].transform.position = position;
+                
+                
+                if (shipPosition.x == x && shipPosition.y == y)
+                {
+                    ship.transform.DOMoveY(height, 0.2f);
+                }
             }
         }
     }
