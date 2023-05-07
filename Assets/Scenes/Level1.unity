@@ -1943,6 +1943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 216498108}
   - component: {fileID: 216498107}
+  - component: {fileID: 216498109}
   m_Layer: 0
   m_Name: Playing Field
   m_TagString: Untagged
@@ -1995,6 +1996,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &216498109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216498106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cccb97e1287164fac8ba7e4de6c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  octaves:
+  - speed: {x: 6, y: 6}
+    scale: {x: 1, y: 1}
+    height: 1
+    alternate: 0
 --- !u!1 &223160951
 GameObject:
   m_ObjectHideFlags: 0
