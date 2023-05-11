@@ -73,7 +73,7 @@ public class PlayingField : MonoBehaviour
             var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
             var instance = Instantiate(gameControllerPrefab);
             instance.name = "Game Manager";         
-            gameController = GameController.instance.GetComponent<GameController>();          
+            gameController = GameController.instance.GetComponent<GameController>();
         }
 
         DrawPlayingFieldBorder();
@@ -241,8 +241,13 @@ public class PlayingField : MonoBehaviour
 
         if (!IsInPlayingField(shipX, shipY) || ship.NoFood())
         {
-            Debug.Log("End");
-            GameController.instance.Restart();
+            if (ship.activeSkills[(int)ESkill.DEATH_SKIP]) {
+                Move(playingWidth/2, playingHeight/2, false);
+                ship.activeSkills[(int)ESkill.DEATH_SKIP] = false;
+            }
+            else {
+                GameController.instance.Restart();
+            }
         }
         state = State.Prepare;
         stateCoroutine = null;

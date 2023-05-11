@@ -5,9 +5,17 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class Ship : MonoBehaviour
 {
+    [SerializeField]
+    private HorizontalLayoutGroup _activeCharactersLayoutGroup;
+    [SerializeField]
+    private GameObject _activeCharacterButtonPrefab;
+    
     private int _foodStored = 15;
     public int initialFoodAmount = 30;
     public int foodStored
@@ -34,6 +42,7 @@ public class Ship : MonoBehaviour
 
     private Character[] characters = new Character[(int) ESkill.COUNT];
     public bool[] skills = new bool[(int) ESkill.COUNT];
+    public bool[] activeSkills = new bool[(int) ESkill.COUNT];
     
     public PlayingField field;
     
@@ -49,12 +58,40 @@ public class Ship : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
+    private void ActiveCharacterClicked(ESkill skill) {
+        activeSkills[(int)skill] = !activeSkills[(int)skill];
+        
+        if(skill == ESkill.STREAM_SKIP && activeSkills[(int)skill]) {
+            foodConsumption += 1;
+        } else if(skill == ESkill.STREAM_SKIP && !activeSkills[(int)skill]) {
+            foodConsumption -= 1;
+        }
+        
+    }
+    
+    public void AddActiveCharacter(Character c) {
+        var btn = Instantiate(_activeCharacterButtonPrefab, _activeCharactersLayoutGroup.transform);
+        btn.GetComponent<Button>().onClick.AddListener( () => {
+            ActiveCharacterEventManager.CharacterClicked(c.Skill);
+        });
+        
+        btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = c.Name;
+    }
+    
     public void AddCharacter(Character c) {
         if (!this.skills[(int) c.Skill]) {
-            //TODO: DISPLAY WELCOME MESSAGE
+
+            
+            if (c.Skill == ESkill.STREAM_SKIP) {
+                AddActiveCharacter(c);
+            } else if (c.Skill == ESkill.DEATH_SKIP) {
+                this.activeSkills[(int)ESkill.DEATH_SKIP] = true;
+            }
             
             this.characters[(int) c.Skill] = c;
             this.skills[(int) c.Skill] = true;
+            
+            ActiveCharacterEventManager.CharacterAdded(c);
         }
     }
 
@@ -80,6 +117,10 @@ public class Ship : MonoBehaviour
     public bool NoFood()
     {
         return foodStored <= 0;
+    }
+
+    private void OnEnable() {
+        ActiveCharacterEventManager.OnCharacterClicked += ActiveCharacterClicked;
     }
 
     private void Start()
