@@ -1944,6 +1944,7 @@ GameObject:
   - component: {fileID: 216498108}
   - component: {fileID: 216498107}
   - component: {fileID: 216498109}
+  - component: {fileID: 216498110}
   m_Layer: 0
   m_Name: Playing Field
   m_TagString: Untagged
@@ -2013,6 +2014,26 @@ MonoBehaviour:
     scale: {x: 1, y: 1}
     height: 1
     alternate: 0
+--- !u!114 &216498110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216498106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bf4c5ab9aad4746a0d260006f59cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clouds:
+  - {fileID: 1418253162428290563, guid: b563bf2010e852e47810d8e4192c09cc, type: 3}
+  - {fileID: 216830821982225644, guid: ea927c0077b02b94c85ff1bbf8add6aa, type: 3}
+  - {fileID: 8717981177262793220, guid: 87932c72d0526274ab5a436fd73a6398, type: 3}
+  - {fileID: 6923396022767943698, guid: 4e0d50b5cf2302d4aaf587a396d307a0, type: 3}
+  distance: 10
+  spacicng: 1
+  border: 0.33
 --- !u!1 &223160951
 GameObject:
   m_ObjectHideFlags: 0
@@ -10293,8 +10314,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.18823531, g: 0.3019608, b: 0.37254903, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
