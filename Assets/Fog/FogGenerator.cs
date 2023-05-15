@@ -30,9 +30,9 @@ public class FogGenerator : MonoBehaviour
         var pymin = transform.position.z - border;
         var pymax = transform.position.z + pfHeight + border;
 
-        for (float x = xmin; x < xmax + 1; x += spacicng)
+        for (float x = xmin - 0.5f; x < xmax + 0.5f; x += spacicng)
         {
-            for (float y = ymin; y < ymax + 1; y += spacicng)
+            for (float y = ymin - 0.5f; y < ymax + 0.5f; y += spacicng)
             { 
                 if (x > pxmin && x < pxmax && y > pymin && y < pymax)
                     continue;
