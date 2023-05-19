@@ -5,12 +5,18 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
+using static System.TimeZoneInfo;
 
 public class Ship : MonoBehaviour
 {
+  
+
+
     private int _foodStored = 15;
     public int initialFoodAmount = 30;
     public int foodStored
+
     {
         get
         {

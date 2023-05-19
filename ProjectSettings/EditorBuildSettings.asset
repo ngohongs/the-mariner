@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title.unity
-    guid: 4dfcc8c2c8207804e8f05d4b5f176996
+    path: Assets/Scenes/ONDRA/MainMenu.unity
+    guid: f36a9f27cee05c2468f7b92176cb544a
+  - enabled: 1
+    path: Assets/Scenes/ONDRA/talkScene.unity
+    guid: dcdee2b6a80b10f439754b41d5ebc629
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: eb7f250345136df49ad18084ab996580
@@ -17,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: 55f4148a4b3d8e24aac1029428fda5d6
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 4dfcc8c2c8207804e8f05d4b5f176996
   m_configObjects: {}

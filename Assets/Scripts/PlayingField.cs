@@ -48,6 +48,19 @@ public class PlayingField : MonoBehaviour
 
     private GameController gameController;
 
+
+    //ONDRA
+
+
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private GameObject textFieldOne;
+    [SerializeField] private GameObject textFieldTwo;
+    public float transitionTime = 3;
+
+
+    //
+
+
     private void OnDrawGizmos()
     {
         if (tilemap == null)
@@ -68,6 +81,10 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //ONDRA
+        canvasGroup.alpha = 0f;
+      
+
         if (GameController.instance == null)
         {
             var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
@@ -239,11 +256,42 @@ public class PlayingField : MonoBehaviour
             GameController.instance.NextScene();
         }
 
-        if (!IsInPlayingField(shipX, shipY) || ship.NoFood())
+        if (!IsInPlayingField(shipX, shipY))
         {
             Debug.Log("End");
+
+
+            //ONDRA
+           
+            canvasGroup.DOFade(1f, 2f).OnComplete(() =>
+            {
+                
+                textFieldOne.gameObject.SetActive(true);
+            });
+            yield return new WaitForSeconds(6f);
+            textFieldOne.gameObject.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
+
+            
+
             GameController.instance.Restart();
         }
+        else if (ship.NoFood())
+        {
+            canvasGroup.DOFade(1f, 2f).OnComplete(() =>
+            {
+
+                textFieldTwo.gameObject.SetActive(true);
+            });
+            yield return new WaitForSeconds(6f);
+            textFieldTwo.gameObject.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
+        }
+
+
+        //
+
+
         state = State.Prepare;
         stateCoroutine = null;
         Debug.Log("Finish over " + stopwatch.ElapsedMilliseconds / 1000);
