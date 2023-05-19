@@ -11,6 +11,8 @@ using Debug = UnityEngine.Debug;
 
 public class PlayingField : MonoBehaviour
 {
+    public bool isStatic = false;
+
     [Header("Tilemap")]
     public Tilemap tilemap;
 
@@ -82,6 +84,12 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (isStatic)
+        {
+            Move(shipX, shipY, false);
+            return; 
+        }
+
         if (GameController.instance == null)
         {
             var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
@@ -137,6 +145,10 @@ public class PlayingField : MonoBehaviour
         lineRenderer.startWidth = 0.2f;
         lineRenderer.endWidth = 0.2f;
         lineRenderer.positionCount = 6;
+ 
+        ColorUtility.TryParseHtmlString("#ffb12e", out Color color);
+        lineRenderer.material.color = color;
+
         var offset = new Vector3(xOffset, 0, yOffset);
         lineRenderer.SetPositions(new Vector3[]
             {
@@ -153,6 +165,8 @@ public class PlayingField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isStatic) { return; }
+
         if (stateCoroutine != null)
             return;
 
