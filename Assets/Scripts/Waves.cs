@@ -59,7 +59,10 @@ public class Waves : MonoBehaviour
                 
                 if (shipPosition.x == x && shipPosition.y == y)
                 {
-                    ship.transform.DOMoveY(height, 0.2f);
+                    if (ship == null)
+                        return;
+
+                    ship.transform.DOMoveY(height, 0.0f);
                 }
             }
         }

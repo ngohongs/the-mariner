@@ -12,6 +12,7 @@ public class Dialogue : MonoBehaviour
     public float textSpeed = 1.0f;
     public int index = 0;
     public GameObject pauseMenu;
+    private bool inDialog = false;
 
     // Update is called once per frame
     void Update()
@@ -35,6 +36,7 @@ public class Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
+        inDialog = true;
         index = 0;
         textCompoment.text = "";
         StartCoroutine(TypeLines());
@@ -66,6 +68,7 @@ public class Dialogue : MonoBehaviour
             gameObject.SetActive(false);
             GameController.instance.uIContoller.HideElement("Screen");
             Time.timeScale = 1.0f;
+            inDialog = false;
             
         }
     }
@@ -76,5 +79,10 @@ public class Dialogue : MonoBehaviour
         lines = new List<string>(text.Split(new []{ Environment.NewLine, "\n"}, StringSplitOptions.None));
         gameObject.SetActive(true);
         StartDialogue();
+    }
+
+    public bool IsInDialog()
+    {
+        return inDialog;
     }
 }

@@ -1,0 +1,7 @@
+E
+This is an example transcript.
+This is the second line of the first transcript.
+--
+P
+This is a prompt after the first transcript.
+This is a prompt after the second transcript.

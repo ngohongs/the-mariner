@@ -56,7 +56,11 @@ public class GameController : MonoBehaviour
 
     private void ShowUI()
     {
+        var name = SceneManager.GetActiveScene().name;
+
         uIContoller.HideAllElemenets();
+        uIContoller.transform.GetChild(3).gameObject.SetActive(false);
+
         if (sceneIndex == 0)
         {
             uIContoller.ShowElement("Main Menu");
@@ -65,15 +69,18 @@ public class GameController : MonoBehaviour
         {
             uIContoller.HideElement("Main Menu");
         }
-        if (sceneIndex == 1)
-        {
-            string tutorial = Resources.Load<TextAsset>("Texts/Tutorial").text;
-            // uIContoller.DisplayDialogueText(tutorial);
-        }
-        if (sceneIndex != 0)
+
+        bool isLevel = name.ToLower().Contains("level");
+        bool isTalk = name.ToLower().Contains("talk");
+
+        if (isLevel)
         {
             uIContoller.ShowElement("Food");
             uIContoller.ShowElement("Diary Button");
+        }
+        else if (isTalk)
+        {
+            uIContoller.transform.GetChild(3).gameObject.SetActive(true);
         }
     }
 

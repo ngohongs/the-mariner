@@ -41,5 +41,8 @@ public class Scaler : MonoBehaviour
         scale = true;
     }
 
-
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
 }

@@ -113,6 +113,11 @@ public class Ship : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
 }
 
 

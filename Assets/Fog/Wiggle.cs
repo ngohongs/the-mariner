@@ -18,6 +18,9 @@ public class Wiggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform == null)
+            return;
+        
         if (!inTween)
         {
             inTween = true;
@@ -35,4 +38,8 @@ public class Wiggle : MonoBehaviour
         targetSpeed = Random.Range(minSpeed, maxSpeed);
     }
 
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
 }

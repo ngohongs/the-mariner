@@ -84,12 +84,6 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (isStatic)
-        {
-            Move(shipX, shipY, false);
-            return; 
-        }
-
         if (GameController.instance == null)
         {
             var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
@@ -285,11 +279,12 @@ public class PlayingField : MonoBehaviour
                 textfield.gameObject.SetActive(true);
             });
 
-            yield return new WaitForSeconds(6f);
+            yield return new WaitForSeconds(4f);
 
             textfield.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(transitionTime);
+            canvasGroup.alpha = 0;
 
             GameController.instance.Restart();
         }
