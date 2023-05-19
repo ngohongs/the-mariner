@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ONDRA/MainMenu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: f36a9f27cee05c2468f7b92176cb544a
   - enabled: 1
-    path: Assets/Scenes/ONDRA/talkScene.unity
+    path: Assets/Scenes/talkScene.unity
     guid: dcdee2b6a80b10f439754b41d5ebc629
   - enabled: 1
     path: Assets/Scenes/Level1.unity

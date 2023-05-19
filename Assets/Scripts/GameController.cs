@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour
         if (sceneIndex != 0)
         {
             uIContoller.ShowElement("Food");
+            uIContoller.ShowElement("Diary Button");
         }
     }
 
@@ -118,6 +119,7 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
+        DOTween.KillAll();
         sceneIndex = 0;
         SceneManager.LoadScene(sceneIndex);
         uIContoller.HideAllElemenets();

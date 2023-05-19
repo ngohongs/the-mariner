@@ -31,7 +31,18 @@ public class Ship : MonoBehaviour
             }
             else
             {
-                foodUI = GameController.instance.uIContoller.GetUIElement("Food").GetComponent<TextMeshProUGUI>();
+                var foodPanel = GameController.instance.uIContoller.GetUIElement("Food");
+                // iterate through all childs in foodPanel and find one named FoodAmount
+
+                foreach (Transform child in foodPanel.transform)
+                {
+                    if (child.name == "FoodAmount")
+                    {
+                        foodUI = child.GetComponent<TextMeshProUGUI>();
+                        foodUI.text = foodStored.ToString();
+                    }
+                }
+                
             }
         }
     }
@@ -91,10 +102,15 @@ public class Ship : MonoBehaviour
     private void Start()
     {
         foodStored = initialFoodAmount;
-        foodUI = GameController.instance.uIContoller.GetUIElement("Food").GetComponent<TextMeshProUGUI>();
-        if (foodUI != null)
+        var foodPanel = GameController.instance.uIContoller.GetUIElement("Food");
+        foreach (Transform child in foodPanel.transform)
         {
-            foodUI.text = foodStored.ToString();
+            if (child.name == "FoodAmount")
+            {
+                foodUI = child.GetComponent<TextMeshProUGUI>();
+                foodUI.text = foodStored.ToString();
+                break;
+            }
         }
     }
 }

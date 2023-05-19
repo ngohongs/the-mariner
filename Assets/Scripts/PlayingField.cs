@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -52,9 +53,9 @@ public class PlayingField : MonoBehaviour
     //ONDRA
 
 
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private GameObject textFieldOne;
-    [SerializeField] private GameObject textFieldTwo;
+    private CanvasGroup canvasGroup;
+    private TextMeshProUGUI textfield;
+
     public float transitionTime = 3;
 
 
@@ -81,10 +82,6 @@ public class PlayingField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ONDRA
-        canvasGroup.alpha = 0f;
-      
-
         if (GameController.instance == null)
         {
             var gameControllerPrefab = (GameObject) Resources.Load("Game Manager");
@@ -92,6 +89,10 @@ public class PlayingField : MonoBehaviour
             instance.name = "Game Manager";         
             gameController = GameController.instance.GetComponent<GameController>();          
         }
+
+        canvasGroup = GameController.instance.uIContoller.transform.GetChild(2).GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0.0f;
+        textfield = canvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
         DrawPlayingFieldBorder();
 
@@ -212,7 +213,7 @@ public class PlayingField : MonoBehaviour
 
         var tile = TileIn(shipX, shipY);
         
-        while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY))
+        while (IsInPlayingField(shipX, shipY) && IsInTilemap(shipX, shipY) && !ship.NoFood())
         {
             if (IsShipAtTheEnd())
                 break;
@@ -256,45 +257,37 @@ public class PlayingField : MonoBehaviour
             GameController.instance.NextScene();
         }
 
-        if (!IsInPlayingField(shipX, shipY))
+        //ONDRA
+
+        if (IsGameOver())
         {
             Debug.Log("End");
 
+            var text = !IsInPlayingField(shipX, shipY) ? "Out" : "Hungry";
+            textfield.text = text;
 
-            //ONDRA
-           
             canvasGroup.DOFade(1f, 2f).OnComplete(() =>
             {
-                
-                textFieldOne.gameObject.SetActive(true);
+                textfield.gameObject.SetActive(true);
             });
-            yield return new WaitForSeconds(6f);
-            textFieldOne.gameObject.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
 
-            
+            yield return new WaitForSeconds(6f);
+
+            textfield.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(transitionTime);
 
             GameController.instance.Restart();
         }
-        else if (ship.NoFood())
-        {
-            canvasGroup.DOFade(1f, 2f).OnComplete(() =>
-            {
-
-                textFieldTwo.gameObject.SetActive(true);
-            });
-            yield return new WaitForSeconds(6f);
-            textFieldTwo.gameObject.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
-        }
-
-
-        //
-
 
         state = State.Prepare;
         stateCoroutine = null;
         Debug.Log("Finish over " + stopwatch.ElapsedMilliseconds / 1000);
+    }
+
+    public bool IsGameOver()
+    {
+        return !IsInPlayingField(shipX, shipY) || ship.NoFood();
     }
 
     public Tile GetDestination()
