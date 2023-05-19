@@ -279,11 +279,11 @@ public class PlayingField : MonoBehaviour
                 textfield.gameObject.SetActive(true);
             });
 
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(3f);
 
             textfield.gameObject.SetActive(false);
 
-            yield return new WaitForSeconds(transitionTime);
+            yield return new WaitForSeconds(1);
             canvasGroup.alpha = 0;
 
             GameController.instance.Restart();
