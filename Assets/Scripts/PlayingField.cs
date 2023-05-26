@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,7 +28,13 @@ public class PlayingField : MonoBehaviour
     public int shipX = 2;
     public int shipY = 2;
 
+    [Header("Cameras")]
+    public Camera mainCamera;
+    public Camera endCamera;
+    
+    
     [Header("State")]
+    public bool isLastLevel = false;
     public State state = State.Prepare;
     public enum State { Prepare, Action, Finish };
     public Tile destination = null;
@@ -48,6 +55,8 @@ public class PlayingField : MonoBehaviour
 
     private GameController gameController;
 
+    public static Action OnEndingEvent;
+    
     private void OnDrawGizmos()
     {
         if (tilemap == null)
@@ -148,7 +157,7 @@ public class PlayingField : MonoBehaviour
     }
 
     private IEnumerator Prepare()
-    {   
+    {
         stopwatch.Restart();
         destination = null;
         UpdateMoveSet();
@@ -189,6 +198,10 @@ public class PlayingField : MonoBehaviour
     {
         var coord = TileToPlayCoords(destination.x, destination.y);
 
+        if (ship.activeSkills[(int)ESkill.GET_HEALTH]) {
+            ship.cooldownCounter = 0;
+        }
+        
         Move(coord.x, coord.y);
 
         yield return new WaitForSeconds(actionDuration);
@@ -226,6 +239,11 @@ public class PlayingField : MonoBehaviour
         return PlayToTileCoords(shipX, shipY).y == tilemap.height - 1;
     }
 
+    private IEnumerator WaitAndSetFade() {
+        yield return new WaitForSeconds(1.5f);
+        GameController.instance.NextScene();
+    }
+    
     private IEnumerator Finish()
     {
         ship.ConsumeFood();
@@ -233,7 +251,11 @@ public class PlayingField : MonoBehaviour
 
         yield return new WaitForSeconds(finishDuration);
 
-        if (IsShipAtTheEnd())
+        if (IsShipAtTheEnd() && isLastLevel) {
+            OnEndingEvent?.Invoke();
+            StartCoroutine(WaitAndSetFade());
+            
+        } else if (IsShipAtTheEnd())
         {
             Debug.Log("End");
             GameController.instance.NextScene();
@@ -244,6 +266,7 @@ public class PlayingField : MonoBehaviour
             if (ship.activeSkills[(int)ESkill.DEATH_SKIP]) {
                 Move(playingWidth/2, playingHeight/2, false);
                 ship.activeSkills[(int)ESkill.DEATH_SKIP] = false;
+                Ship.OnShipRessurected?.Invoke();
             }
             else {
                 GameController.instance.Restart();
@@ -360,7 +383,7 @@ public class PlayingField : MonoBehaviour
 
             var tile = TileIn(x, y);
 
-            if (!tile.IsMoveable())
+            if (!tile.IsMoveable(ship))
                 continue;
 
             result.Add(tile);            

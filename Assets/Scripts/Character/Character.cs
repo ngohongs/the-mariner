@@ -26,6 +26,12 @@ public class Character {
             "",
             "CharD is a master of resurrection, but be warned: their magic comes with a catch. If you sink, they'll bring you back to life, but you'll lose all your other crew members in the process. It's like hitting the reset button, but with extra pain and suffering!"
         ),
+        new Character(
+            "The Diplomat",
+            ESkill.GET_HEALTH,
+            "",
+            "When you visit an unknown land, the Diplomat will convince a few people to join your crew."
+        ),
     };
     
     private ESkill _skill;

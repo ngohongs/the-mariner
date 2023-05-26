@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 public class Ship : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class Ship : MonoBehaviour
     
     private int _foodStored = 15;
     public int initialFoodAmount = 30;
+
+    public int cooldown = 2;
+    public int cooldownCounter = 0;
+    
+    public Sprite[] _imageCharacters = new Sprite[4];
     public int foodStored
     {
         get
@@ -45,10 +51,10 @@ public class Ship : MonoBehaviour
     public bool[] activeSkills = new bool[(int) ESkill.COUNT];
     
     public PlayingField field;
-    
-
     public TextMeshProUGUI foodUI;
 
+    public static Action OnShipRessurected;
+    
     public void Center()
     {
         var center = new Vector3(field.shipX + field.xOffset + 0.5f, 0, field.shipY + field.yOffset + 0.5f);
@@ -70,21 +76,30 @@ public class Ship : MonoBehaviour
     }
     
     public void AddActiveCharacter(Character c) {
-        var btn = Instantiate(_activeCharacterButtonPrefab, _activeCharactersLayoutGroup.transform);
-        btn.GetComponent<Button>().onClick.AddListener( () => {
-            ActiveCharacterEventManager.CharacterClicked(c.Skill);
-        });
+        var parent = Instantiate(_activeCharacterButtonPrefab, _activeCharactersLayoutGroup.transform);
         
-        btn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = c.Name;
+        parent.transform.GetComponent<Image>().overrideSprite = _imageCharacters[(int) c.Skill];
+        var header = parent.transform.GetChild(0);
+        header.GetComponent<TextMeshProUGUI>().text = c.Name;
+        
+        var btn = parent.transform.GetComponent<Button>();
+        var panel = parent.transform.GetChild(1);
+        
+        if (c.Skill == ESkill.STREAM_SKIP || c.Skill == ESkill.GET_HEALTH) {
+            btn.onClick.AddListener( () => {
+                panel.gameObject.SetActive(!panel.gameObject.activeSelf);
+                ActiveCharacterEventManager.CharacterClicked(c.Skill);
+            });
+        } else {
+            btn.enabled = false;
+        }
     }
     
     public void AddCharacter(Character c) {
         if (!this.skills[(int) c.Skill]) {
 
-            
-            if (c.Skill == ESkill.STREAM_SKIP) {
-                AddActiveCharacter(c);
-            } else if (c.Skill == ESkill.DEATH_SKIP) {
+            AddActiveCharacter(c);
+            if (c.Skill == ESkill.DEATH_SKIP) {
                 this.activeSkills[(int)ESkill.DEATH_SKIP] = true;
             }
             
@@ -95,6 +110,17 @@ public class Ship : MonoBehaviour
         }
     }
 
+    private void ShipRessurected() {
+        for (var i = 0; i < (int)ESkill.COUNT; i++) {
+            this.skills[i] = false;
+            this.activeSkills[i] = false;
+        }
+
+        foreach (Transform child in _activeCharactersLayoutGroup.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+    
     public bool HasCharacter(Character c) {
         return this.skills[(int)c.Skill];
     }
@@ -103,7 +129,7 @@ public class Ship : MonoBehaviour
     {
         foodConsumption = consumption;
     }
-
+    
     public void ConsumeFood()
     {
         foodStored -= foodConsumption; 
@@ -120,6 +146,7 @@ public class Ship : MonoBehaviour
     }
 
     private void OnEnable() {
+        OnShipRessurected += ShipRessurected;
         ActiveCharacterEventManager.OnCharacterClicked += ActiveCharacterClicked;
     }
 

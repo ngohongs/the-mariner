@@ -476,8 +476,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da26d25be06caf4581c289f6ee1f3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeCharactersLayoutGroup: {fileID: 0}
+  _activeCharacterButtonPrefab: {fileID: 0}
+  initialFoodAmount: 30
+  cooldown: 2
+  cooldownCounter: 0
+  _imageCharacters:
+  - {fileID: 21300000, guid: 08555830725e434408180a734579769b, type: 3}
+  - {fileID: 21300000, guid: 138ed08bbc60b574b922f123f49f8e7d, type: 3}
+  - {fileID: 21300000, guid: c0298c8775c9b884694f9d3bd2d1704e, type: 3}
+  - {fileID: 21300000, guid: 4ee0845c3d2126d4ca7a9a97d4c56dd5, type: 3}
   foodConsumption: 1
   skills: 0000
+  activeSkills: 00000000
   field: {fileID: 0}
   foodUI: {fileID: 0}
 --- !u!1 &1722136988438195789
