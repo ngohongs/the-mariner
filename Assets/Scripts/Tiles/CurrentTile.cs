@@ -13,10 +13,11 @@ public class CurrentTile : Tile
 
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
-        if (field.ship.skills[(int)ESkill.STREAM_SKIP]) {
+        if (field.ship.activeSkills[(int)ESkill.STREAM_SKIP]) {
             wait = false;
             return false;
         }
+        
         wait = true;
         field.Move(GetDirection());
         field.tilemap.Replace(x, y, TileType.Empty);

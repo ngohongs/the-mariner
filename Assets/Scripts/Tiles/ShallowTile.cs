@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShallowTile : Tile
 {
+    
     private void Awake()
     {
         tileType = TileTypeShort.Shallow;

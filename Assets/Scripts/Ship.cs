@@ -5,16 +5,25 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using TMPro;
-using DG.Tweening;
-using static System.TimeZoneInfo;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 public class Ship : MonoBehaviour
 {
-  
-
-
+    [SerializeField]
+    private HorizontalLayoutGroup _activeCharactersLayoutGroup;
+    [SerializeField]
+    private GameObject _activeCharacterButtonPrefab;
+    
     private int _foodStored = 15;
     public int initialFoodAmount = 30;
+
+    public int cooldown = 2;
+    public int cooldownCounter = 0;
+    
+    public Sprite[] _imageCharacters = new Sprite[4];
     public int foodStored
 
     {
@@ -51,12 +60,13 @@ public class Ship : MonoBehaviour
 
     private Character[] characters = new Character[(int) ESkill.COUNT];
     public bool[] skills = new bool[(int) ESkill.COUNT];
+    public bool[] activeSkills = new bool[(int) ESkill.COUNT];
     
     public PlayingField field;
-    
-
     public TextMeshProUGUI foodUI;
 
+    public static Action OnShipRessurected;
+    
     public void Center()
     {
         var center = new Vector3(field.shipX + field.xOffset + 0.5f, 0, field.shipY + field.yOffset + 0.5f);
@@ -66,15 +76,63 @@ public class Ship : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
+    private void ActiveCharacterClicked(ESkill skill) {
+        activeSkills[(int)skill] = !activeSkills[(int)skill];
+        
+        if(skill == ESkill.STREAM_SKIP && activeSkills[(int)skill]) {
+            foodConsumption += 1;
+        } else if(skill == ESkill.STREAM_SKIP && !activeSkills[(int)skill]) {
+            foodConsumption -= 1;
+        }
+        
+    }
+    
+    public void AddActiveCharacter(Character c) {
+        var parent = Instantiate(_activeCharacterButtonPrefab, _activeCharactersLayoutGroup.transform);
+        
+        parent.transform.GetComponent<Image>().overrideSprite = _imageCharacters[(int) c.Skill];
+        var header = parent.transform.GetChild(0);
+        header.GetComponent<TextMeshProUGUI>().text = c.Name;
+        
+        var btn = parent.transform.GetComponent<Button>();
+        var panel = parent.transform.GetChild(1);
+        
+        if (c.Skill == ESkill.STREAM_SKIP || c.Skill == ESkill.GET_HEALTH) {
+            btn.onClick.AddListener( () => {
+                panel.gameObject.SetActive(!panel.gameObject.activeSelf);
+                ActiveCharacterEventManager.CharacterClicked(c.Skill);
+            });
+        } else {
+            btn.enabled = false;
+        }
+    }
+    
     public void AddCharacter(Character c) {
         if (!this.skills[(int) c.Skill]) {
-            //TODO: DISPLAY WELCOME MESSAGE
+
+            AddActiveCharacter(c);
+            if (c.Skill == ESkill.DEATH_SKIP) {
+                this.activeSkills[(int)ESkill.DEATH_SKIP] = true;
+            }
             
             this.characters[(int) c.Skill] = c;
             this.skills[(int) c.Skill] = true;
+            
+            ActiveCharacterEventManager.CharacterAdded(c);
         }
     }
 
+    private void ShipRessurected() {
+        for (var i = 0; i < (int)ESkill.COUNT; i++) {
+            this.skills[i] = false;
+            this.activeSkills[i] = false;
+        }
+
+        foreach (Transform child in _activeCharactersLayoutGroup.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+    
     public bool HasCharacter(Character c) {
         return this.skills[(int)c.Skill];
     }
@@ -83,7 +141,7 @@ public class Ship : MonoBehaviour
     {
         foodConsumption = consumption;
     }
-
+    
     public void ConsumeFood()
     {
         foodStored -= foodConsumption; 
@@ -97,6 +155,11 @@ public class Ship : MonoBehaviour
     public bool NoFood()
     {
         return foodStored <= 0;
+    }
+
+    private void OnEnable() {
+        OnShipRessurected += ShipRessurected;
+        ActiveCharacterEventManager.OnCharacterClicked += ActiveCharacterClicked;
     }
 
     private void Start()

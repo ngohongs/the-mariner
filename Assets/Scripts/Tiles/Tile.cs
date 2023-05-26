@@ -65,5 +65,5 @@ public abstract class Tile : MonoBehaviour
     public int x = -1, y = -1;
     public abstract bool ApplyEffect(PlayingField field, out bool wait);
 
-    public virtual bool IsMoveable() => true;
+    public virtual bool IsMoveable(Ship ship) => true;
 }

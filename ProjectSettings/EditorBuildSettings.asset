@@ -23,4 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 4dfcc8c2c8207804e8f05d4b5f176996
+    path: Assets/Scenes/Domped.unity
+    guid: c7b85a87e6a19144cad1adc548b8cecf
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: abd49853e08c4dd40aff732522cc4edf
   m_configObjects: {}
