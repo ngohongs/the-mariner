@@ -60,6 +60,11 @@ public class PlayingField : MonoBehaviour
 
     public float transitionTime = 3;
 
+    [SerializeField] private AudioSource clickOnTile;
+
+    public AudioSource[] sailSounds;
+    // [SerializeField] private AudioSource shipMove;
+
 
     //
 
@@ -265,7 +270,7 @@ public class PlayingField : MonoBehaviour
             GameController.instance.NextScene();
         }
 
-        //ONDRA
+      // ondra
 
         if (IsGameOver())
         {
@@ -311,6 +316,12 @@ public class PlayingField : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100))
             {
+                //ONDRA
+
+                clickOnTile.Play();
+
+                //
+                    
                 var tile = hit.transform.gameObject.GetComponent<Tile>();
 
                 if (tile != null)
@@ -353,6 +364,16 @@ public class PlayingField : MonoBehaviour
         completed++;
     }
 
+    public void PlaySailSound()
+    {
+        if (sailSounds.Length > 0)
+        {
+            int randomSourceIndex = UnityEngine.Random.Range(0, sailSounds.Length);
+            AudioSource selectedSource = sailSounds[randomSourceIndex];
+            selectedSource.Play();
+        }
+    }
+
     void Move(int x, int y, bool tween = true)
     {
         Debug.Log("Move : " + x + " " + y + " " + stopwatch.ElapsedMilliseconds / 1000 );
@@ -372,9 +393,20 @@ public class PlayingField : MonoBehaviour
 
                 var sequence = DOTween.Sequence();
                 sequence.Append(ship.transform.DORotate(new Vector3(0, angle, 0), moveDuration / 2).SetEase(Ease.OutSine));
+
+              //  DOTween.To(() => { return PlaySailSound(); }, 0f, 0f, 0.5);
+
                 sequence.Append(ship.transform.DORotate(Vector3.zero, moveDuration / 2).SetEase(Ease.InSine));
             }
 
+            //ONDRA
+
+
+         
+
+
+
+            // ONDRA
         }
    
         else
