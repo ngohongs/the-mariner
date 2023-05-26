@@ -112,27 +112,28 @@ public class Tilemap : MonoBehaviour
         return map[i];
     }
 
-    public void Replace(int x, int y, TileType type)
+    public Tile Replace(int x, int y, TileType type)
     {
         int i = Index(x, y);
 
         Destroy(map[i].gameObject);
 
-        Insert(x, y, type);
+        return Insert(x, y, type);
     }
 
-    public void Insert(int x, int y, TileType type)
+    public Tile Insert(int x, int y, TileType type)
     {
-        Insert(Index(x, y), type);
+        return Insert(Index(x, y), type);
     }
 
-    public void Insert(int i, TileType type)
+    public Tile Insert(int i, TileType type)
     {
         map[i] = Instantiate(tiles[(int)type], transform).GetComponent<Tile>();
         map[i].name += "_(" + Col(i) + "," + Row(i) + ")";
         map[i].transform.localPosition = new Vector3(Col(i) + 0.5f, 0, Row(i) + 0.5f);
         map[i].x = Col(i);
         map[i].y = Row(i);
+        return map[i];
     }
 
     public void Load()

@@ -62,6 +62,7 @@ MonoBehaviour:
   tileType: 0
   x: -1
   y: -1
+  soundEffect: {fileID: 0}
 --- !u!1001 &8235805735642997005
 PrefabInstance:
   m_ObjectHideFlags: 0

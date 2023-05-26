@@ -7,7 +7,7 @@ public class LvlOneScript : MonoBehaviour
     public TextAsset text;
     void Start()
     {
-        GameController.instance.uIContoller.DisplayDialogueText(text.text); 
+        GameController.instance.uIContoller.DisplayCharacterDialogueText(text.text); 
     }
 
     // Update is called once per frame

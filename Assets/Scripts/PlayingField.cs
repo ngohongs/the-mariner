@@ -54,6 +54,9 @@ public class PlayingField : MonoBehaviour
 
     //ONDRA
 
+    public EndTalk endDialog;
+    public int beforeEndTrigger = 3;
+    private bool endPlayed = false;
 
     private CanvasGroup canvasGroup;
     private TextMeshProUGUI textfield;
@@ -179,7 +182,13 @@ public class PlayingField : MonoBehaviour
     }
 
     private IEnumerator Prepare()
-    {   
+    {
+        if (PlayToTileCoords(0, shipY).y >= tilemap.height - beforeEndTrigger && endDialog != null && !endPlayed)
+        {
+            endPlayed = true;
+            endDialog.StartTalk();
+        }
+
         stopwatch.Restart();
         destination = null;
         UpdateMoveSet();
@@ -188,9 +197,6 @@ public class PlayingField : MonoBehaviour
         {
             yield return null;
         }
-
-        // Click on a new tile
-        Memory.instance.Remember(destination.tileType);
         
 
         // Click on a tile that is not in the move set
@@ -243,8 +249,6 @@ public class PlayingField : MonoBehaviour
 
             if (tile == null)
                 break;
-
-            Memory.instance.Remember(tile.tileType);
         }
 
         state = State.Finish;
@@ -316,11 +320,7 @@ public class PlayingField : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                //ONDRA
-
                 clickOnTile.Play();
-
-                //
                     
                 var tile = hit.transform.gameObject.GetComponent<Tile>();
 
@@ -392,23 +392,11 @@ public class PlayingField : MonoBehaviour
 
 
                 var sequence = DOTween.Sequence();
+                sequence.AppendCallback(() => PlaySailSound());
                 sequence.Append(ship.transform.DORotate(new Vector3(0, angle, 0), moveDuration / 2).SetEase(Ease.OutSine));
-
-              //  DOTween.To(() => { return PlaySailSound(); }, 0f, 0f, 0.5);
-
                 sequence.Append(ship.transform.DORotate(Vector3.zero, moveDuration / 2).SetEase(Ease.InSine));
             }
-
-            //ONDRA
-
-
-         
-
-
-
-            // ONDRA
         }
-   
         else
             ship.transform.position = new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset);
 

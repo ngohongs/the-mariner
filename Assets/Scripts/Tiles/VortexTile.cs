@@ -13,7 +13,7 @@ public class VortexTile : Tile
     {
         wait = true;
         field.Move(GetDirection());
-        field.tilemap.Replace(x, y, TileType.Empty);
+        ((EmptyTile)field.tilemap.Replace(x, y, TileType.Empty)).PlayVortexSound();
         return true;
     }
 

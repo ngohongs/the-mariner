@@ -47,14 +47,13 @@ public class StartTalk : MonoBehaviour
         {
             if (block[0] == 'P')
             {
-
                 Debug.Log("Player " + block.Substring(2));
-                talkManager.PlayerSpeach(block.Substring(2));
+                talkManager.PlayerSpeach(block.Substring(2).Trim());
             }
             else if (block[0] == 'E')
             {
                 Debug.Log("Enemy " + block.Substring(2));
-                talkManager.EnemySpeach(block.Substring(2));
+                talkManager.EnemySpeach(block.Substring(2).Trim());
             }
             yield return new WaitUntil(() => !talkManager.talking);
         }

@@ -13,10 +13,13 @@ public class BarrelTile : Tile
 
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
-        
+        if (soundEffect != null)
+        {
+            soundEffect.Play();
+        }
         field.ship.AddFood(foodAmount);
         wait = false;
-        field.tilemap.Replace(x, y, TileType.Empty);
+        transform.GetChild(0).gameObject.SetActive(false);
         return false;
     }
 }

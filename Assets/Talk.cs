@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Talk : MonoBehaviour
 {
@@ -9,6 +10,13 @@ public class Talk : MonoBehaviour
     public GameObject enemy;
 
     public Dialogue dialogue;
+    public RawImage background;
+    private bool _showBackground = true;
+    public bool ShowBackground
+    {
+        get { return _showBackground; }
+        set { background.enabled = value; } 
+    }
 
     public bool talking { get; private set; } = false;
 
