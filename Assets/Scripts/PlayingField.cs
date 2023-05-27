@@ -177,7 +177,7 @@ public class PlayingField : MonoBehaviour
 
     private IEnumerator Prepare()
     {
-        if (PlayToTileCoords(0, shipY).y >= tilemap.height - beforeEndTrigger && endDialog != null && !endPlayed)
+        if (PlayToTileCoords(0, shipY).y >= tilemap.end - beforeEndTrigger && endDialog != null && !endPlayed)
         {
             endPlayed = true;
             endDialog.StartTalk();

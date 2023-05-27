@@ -26,6 +26,7 @@ public class Waves : MonoBehaviour
     private void Awake()
     {
         playingField = GetComponent<PlayingField>();
+        Debug.Log(playingField);
         tilemap = playingField.tilemap;
         ship = playingField.ship;
     }
