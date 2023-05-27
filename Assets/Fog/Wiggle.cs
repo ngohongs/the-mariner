@@ -10,8 +10,8 @@ public class Wiggle : MonoBehaviour
     public float minSpeed = 0.25f;
     public float maxSpeed = 1f;
 
-    private float targetSize;
-    private float targetSpeed;
+    private float targetSize = 0.33f;
+    private float targetSpeed = 1.0f;
 
     private bool inTween = false;
 

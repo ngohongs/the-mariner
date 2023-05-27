@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5887059692208571595}
   - component: {fileID: 5887059692208571594}
   - component: {fileID: 1355302443992805046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shallow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterTile_Empty
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cd21b8802274060408cbd85076cd2419, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd21b8802274060408cbd85076cd2419, type: 3}
 --- !u!4 &6213191656020074899 stripped
@@ -302,9 +306,93 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8383124558419344257, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7271449666460269675, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6577237425059042219, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5546747315237514756, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5117700066308340382, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5063223942988036812, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4636300777304409883, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -3798597711559607027, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2914413575082383075, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
       propertyPath: m_Name
       value: WaterTile_Shallow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502877291743220047, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971542036940430761, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214726985332892257, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245042011116262203, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252682845850649624, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014503084441653313, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512510688612296998, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919683763462532184, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009987137999418058, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8485173162082002552, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f84dc9daebd01941bfe9671abe95741, type: 3}

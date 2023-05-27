@@ -51,9 +51,6 @@ public class PlayingField : MonoBehaviour
 
     private GameController gameController;
 
-
-    //ONDRA
-
     public EndTalk endDialog;
     public int beforeEndTrigger = 3;
     private bool endPlayed = false;
@@ -66,10 +63,8 @@ public class PlayingField : MonoBehaviour
     [SerializeField] private AudioSource clickOnTile;
 
     public AudioSource[] sailSounds;
-    // [SerializeField] private AudioSource shipMove;
 
-
-    //
+    public MoveSetDisplayer moveSetDisplayer;
 
 
     private void OnDrawGizmos()
@@ -191,7 +186,14 @@ public class PlayingField : MonoBehaviour
 
         stopwatch.Restart();
         destination = null;
-        UpdateMoveSet();
+
+        var moves = UpdateMoveSet();
+        moveSetDisplayer.gameObject.SetActive(true);
+        moveSetDisplayer.SetPosition(ship.transform.position.x, ship.transform.position.z);
+        moveSetDisplayer.Show(moves);
+
+
+        
 
         while ((destination = GetDestination()) == null)
         {
@@ -224,6 +226,8 @@ public class PlayingField : MonoBehaviour
 
     private IEnumerator Action()
     {
+        moveSetDisplayer.gameObject.SetActive(false);
+        moveSetDisplayer.Hide();
         var coord = TileToPlayCoords(destination.x, destination.y);
 
         Move(coord.x, coord.y);
@@ -318,11 +322,18 @@ public class PlayingField : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Tile")))
             {
                 clickOnTile.Play();
-                    
-                var tile = hit.transform.gameObject.GetComponent<Tile>();
+                
+                var spot = hit.transform.gameObject.GetComponent<MoveTile>();
+
+                if (spot == null || spot.blocked)
+                    return null;
+
+                var tileObject = TileIn(shipX + spot.direction.x, shipY + spot.direction.y);
+
+                var tile = tileObject.GetComponent<Tile>();
 
                 if (tile != null)
                 {
@@ -410,9 +421,11 @@ public class PlayingField : MonoBehaviour
         Move(shipX + dir.x, shipY + dir.y);
     }
 
-    public void UpdateMoveSet()
+    public bool[] UpdateMoveSet()
     {
         List<Tile> result = new List<Tile>();
+
+        bool[] moveBools = new bool[(int)Direction.None + 1];
 
         for (Direction dir = 0; dir < Direction.None; dir++) 
         {
@@ -421,20 +434,32 @@ public class PlayingField : MonoBehaviour
             var y = shipY + t.y;
 
             if (!IsInPlayingField(x, y) || !IsInTilemap(x, y))
+            {
+                moveBools[(int)dir] = false;
                 continue;
+            }
 
             var tile = TileIn(x, y);
 
             if (!tile.IsMoveable())
+            {
+                moveBools[(int)dir] = false;
                 continue;
-
+            }
+            moveBools[(int)dir] = true;
             result.Add(tile);            
         }
 
         if (shipY == playingHeight - 1 && IsInTilemap(shipX, shipY))
+        {
+            moveBools[(int)Direction.None] = true; 
             result.Add(TileIn(shipX, shipY));
+        }
+        else
+            moveBools[(int)Direction.None] = false;
 
         moveSet = result;
+        return moveBools;
     }
 
     private Tile TileIn(int x, int y)
@@ -458,13 +483,13 @@ public class PlayingField : MonoBehaviour
         return new Vector2Int(x - xOffset, y - yOffset - completed); 
     }
 
-    bool IsInPlayingField(int x, int y)
+    public bool IsInPlayingField(int x, int y)
     {
         return 0 <= x && x < playingWidth &&
                0 <= y && y < playingHeight;
     }
 
-    bool IsInTilemap(int x, int y)
+    public bool IsInTilemap(int x, int y)
     {
         var coord = PlayToTileCoords(x, y);
         return 0 <= coord.x && coord.x < tilemap.width &&

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2970011402564433045}
   - component: {fileID: 2970011402564433047}
   - component: {fileID: 2970011402564433046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Land
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,6 +50,7 @@ MonoBehaviour:
   tileType: 0
   x: -1
   y: -1
+  soundEffect: {fileID: 0}
 --- !u!65 &2970011402564433046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -130,9 +131,25 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4906838889796845047, guid: bff6223c20ae3f64385ad892885e1e81, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2181743766629440291, guid: bff6223c20ae3f64385ad892885e1e81, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bff6223c20ae3f64385ad892885e1e81, type: 3}
       propertyPath: m_Name
       value: WaterTile_Land
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bff6223c20ae3f64385ad892885e1e81, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4356877828898064976, guid: bff6223c20ae3f64385ad892885e1e81, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bff6223c20ae3f64385ad892885e1e81, type: 3}
@@ -207,6 +224,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cd21b8802274060408cbd85076cd2419, type: 3}
       propertyPath: m_Name
       value: WaterTile_Empty
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cd21b8802274060408cbd85076cd2419, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd21b8802274060408cbd85076cd2419, type: 3}
