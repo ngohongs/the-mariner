@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraFade : MonoBehaviour
@@ -10,13 +11,14 @@ public class CameraFade : MonoBehaviour
     public AnimationCurve Curve = new AnimationCurve(new Keyframe(0, 1),
         new Keyframe(0.5f, 0.5f, -1.5f, -1.5f), new Keyframe(1, 0));
     public bool startFadedOut = false;
-
+    public bool startAtInit = false;
 
     private float alpha = 0f; 
     private Texture2D texture;
     private int direction = 0;
     private float time = 0f;
 
+    private bool isStarted = false;
     private bool fading = false;
     private void OnEnable() {
         PlayingField.OnEndingEvent += StartFadeOut;
@@ -33,10 +35,12 @@ public class CameraFade : MonoBehaviour
         texture.SetPixel(0, 0, new Color(fadeColor.r, fadeColor.g, fadeColor.b, alpha));
         texture.Apply();
     }
-
     private void Update()
     {
-        if (direction == 0 && fading)
+        
+       
+        
+        if (direction == 0 && (fading || (startAtInit && !isStarted)))
         {
             if (alpha >= 1f) // Fully faded out
             {
@@ -52,7 +56,10 @@ public class CameraFade : MonoBehaviour
             }
 
             fading = false;
+            isStarted = true;
         }
+        
+        
     }
     public void OnGUI()
     {

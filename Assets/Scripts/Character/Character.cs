@@ -9,22 +9,22 @@ public class Character {
     
     public static List<Character> _allCharacters = new List<Character>() {
         new Character(
-            "CharA",
+            "The Chef",
             ESkill.CHEF,
             "",
-            "CharA is a great cook with a keen sense for spotting barrels with extra food. She'll sometimes share her finds with you!"
+            "The Chef is a great cook with a keen sense for spotting barrels with extra food. She'll sometimes share her finds with you!"
         ),
         new Character(
-            "CharB",
+            "Machio-san",
             ESkill.STREAM_SKIP,
             "",
-            "CharB can help your ship push through treacherous currents, but he'll need a small fee of one piece of food to do so."
+            "Machio-san can help your ship push through treacherous currents, but he'll need a small fee of one piece of food to do so."
         ),
         new Character(
-            "CharD",
+            "Hades",
             ESkill.DEATH_SKIP,
             "",
-            "CharD is a master of resurrection, but be warned: their magic comes with a catch. If you sink, they'll bring you back to life, but you'll lose all your other crew members in the process. It's like hitting the reset button, but with extra pain and suffering!"
+            "Hades is a master of resurrection, but be warned: their magic comes with a catch. If you sink, they'll bring you back to life, but you'll lose all your other crew members in the process. It's like hitting the reset button, but with extra pain and suffering!"
         ),
         new Character(
             "The Diplomat",

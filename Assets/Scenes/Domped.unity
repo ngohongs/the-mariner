@@ -1914,6 +1914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6616794140623e4c8d2b7a761e2871f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStatic: 0
   tilemap: {fileID: 650463842}
   playingWidth: 5
   playingHeight: 5
@@ -1934,6 +1935,7 @@ MonoBehaviour:
   finishDuration: 0.5
   shiftDuration: 0.5
   moveDuration: 0.5
+  transitionTime: 3
 --- !u!4 &216498108
 Transform:
   m_ObjectHideFlags: 0
@@ -8808,6 +8810,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 08555830725e434408180a734579769b, type: 3}
     - target: {fileID: 4692824129333639874, guid: e2816f70525e3e6408762c1b4f81a826, type: 3}
+      propertyPath: _leftPagePrefab
+      value: 
+      objectReference: {fileID: 4194338083541306362, guid: 894d0b206e60cd74caa8d09ca1f6a145, type: 3}
+    - target: {fileID: 4692824129333639874, guid: e2816f70525e3e6408762c1b4f81a826, type: 3}
+      propertyPath: _rightPagePrefab
+      value: 
+      objectReference: {fileID: 223956705302806329, guid: 8ae14721948448e42b7a48ff63fc542f, type: 3}
+    - target: {fileID: 4692824129333639874, guid: e2816f70525e3e6408762c1b4f81a826, type: 3}
       propertyPath: _descriptionPrefab
       value: 
       objectReference: {fileID: 2303916916767635212, guid: 13fd633757ac4fc4cae3573e81cde69a, type: 3}
@@ -9662,6 +9672,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startFadedOut: 0
+  startAtInit: 0
 --- !u!1 &965188345
 GameObject:
   m_ObjectHideFlags: 0
