@@ -180,6 +180,7 @@ public class PlayingField : MonoBehaviour
         if (PlayToTileCoords(0, shipY).y >= tilemap.end - beforeEndTrigger && endDialog != null && !endPlayed)
         {
             endPlayed = true;
+            Debug.Log("End talk");
             endDialog.StartTalk();
         }
 

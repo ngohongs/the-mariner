@@ -28,11 +28,13 @@ public class Talk : MonoBehaviour
             talking = false;
             player.transform.DOKill();
             enemy.transform.DOKill();
-       }
+            Debug.Log("TALK END");
+        }
     }
 
     public void EnemySpeach(string text)
     {
+        Debug.Log("ENEMY TALK START");
         talking = true;
         dialogue.DisplayText(text);
         enemy.transform.DOShakePosition(2, new Vector3(0.0f, 10.0f, 0.0f), 10, 90, true, false).SetUpdate(true).SetLoops(-1);
@@ -41,6 +43,7 @@ public class Talk : MonoBehaviour
 
     public void PlayerSpeach(string text)
     {
+        Debug.Log("PLAYER TALK START");
         talking = true;
         dialogue.DisplayText(text);
         player.transform.DOShakePosition(2, new Vector3(0.0f, 10.0f, 0.0f), 10, 90, true, false).SetUpdate(true).SetLoops(-1);
