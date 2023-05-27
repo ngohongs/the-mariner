@@ -66,7 +66,6 @@ public class PlayingField : MonoBehaviour
 
     public MoveSetDisplayer moveSetDisplayer;
 
-
     private void OnDrawGizmos()
     {
         if (tilemap == null)
@@ -262,7 +261,7 @@ public class PlayingField : MonoBehaviour
 
     private bool IsShipAtTheEnd()
     {
-        return PlayToTileCoords(shipX, shipY).y == tilemap.height - 1;
+        return PlayToTileCoords(shipX, shipY).y == tilemap.end - 1;
     }
 
     private IEnumerator Finish()

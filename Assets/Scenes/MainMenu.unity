@@ -10099,6 +10099,7 @@ MonoBehaviour:
   - {fileID: 5859800394168829207, guid: b6a6753447ef9604bbf462ecc9a59f4b, type: 3}
   - {fileID: 6367169474285412895, guid: 5256eeaf51a73a44fbf2aaeb99b7e6e1, type: 3}
   - {fileID: 2970011402564433044, guid: 069ac271b0454a04abf7a2e872086f01, type: 3}
+  - {fileID: 6367169474285412895, guid: 7ae9145115d6de943b907308648ce911, type: 3}
   - {fileID: 5887059692208571593, guid: 9372db6053d3fae4abae1bb5beb2e2ad, type: 3}
   - {fileID: 9188390159576352318, guid: a26d6fc264107fd448cc708f2a5e24b2, type: 3}
   - {fileID: 5909880439263514865, guid: 52401ad238a52c34ba7bd1ed079116f9, type: 3}
@@ -12378,6 +12379,7 @@ MonoBehaviour:
   transitionTime: 3
   clickOnTile: {fileID: 594672129}
   sailSounds: []
+  moveSetDisplayer: {fileID: 0}
 --- !u!4 &811387691
 Transform:
   m_ObjectHideFlags: 0

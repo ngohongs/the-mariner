@@ -13,6 +13,8 @@ public class Tilemap : MonoBehaviour
     [Min(1)]
     public int height = 1;
 
+    public int end = 1;
+
     [Space]
     [Header("NEEDS TO BE IN SAME ORDER AS ENUM IN Tile.cs (i.e. IN ALPHABETICAL)")]
     public List<GameObject> tiles;
@@ -140,29 +142,35 @@ public class Tilemap : MonoBehaviour
     {
         var config = template.text.Split(new[] { "\r\n", "\r", "\n", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
 
-        if (config.Length < 3)
+        if (config.Length < 4)
         {
             Debug.LogError("Error while loading - invalid template");
             return;
         }
+        
+        if (!Int32.TryParse(config[0], out int end))
+        {
+            Debug.LogError("Error while loading end from template");
+            return;
+        }
 
-        if (!Int32.TryParse(config[0], out int wid))
+        if (!Int32.TryParse(config[1], out int wid))
         {
             Debug.LogError("Error while loading width from template");
             return;
         }
 
-        if (!Int32.TryParse(config[1], out int hei))
+        if (!Int32.TryParse(config[2], out int hei))
         {
             Debug.LogError("Error while loading height from template");
             return;
         }
 
-        var stringMap = config[2..].Reverse();
+        var stringMap = config[3..].Reverse();
 
-        if (stringMap.Count() != hei)
+        if (stringMap.Count() != hei || end > hei)
         {
-            Debug.LogError("Error while loading height doesn't match");
+            Debug.LogError("Error while loading height doesn't match or is smaller than end");
             return;
         }
 
@@ -194,12 +202,12 @@ public class Tilemap : MonoBehaviour
 
         width = wid;
         height = hei;
+        this.end = end;
 
         map = new List<Tile>(new Tile[height * width]);
 
         for (int i = 0; i < tilemap.Count; i++)
         {
-            Debug.Log(tilemap[i]);
             Insert(i, tilemap[i]);
         }
 
