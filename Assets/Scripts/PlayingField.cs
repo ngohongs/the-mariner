@@ -470,11 +470,12 @@ public class PlayingField : MonoBehaviour
 
             var tile = TileIn(x, y);
 
-            if (!tile.IsMoveable())
+            if (!tile.IsMoveable(ship))
             {
                 moveBools[(int)dir] = false;
                 continue;
             }
+
             moveBools[(int)dir] = true;
             result.Add(tile);            
         }

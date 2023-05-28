@@ -70,7 +70,6 @@ public abstract class Tile : MonoBehaviour
     public abstract bool ApplyEffect(PlayingField field, out bool wait);
 
     public virtual bool IsMoveable(Ship ship) => true;
-    public virtual bool IsMoveable() => true;
 
     public AudioSource soundEffect;
 }

@@ -165,6 +165,9 @@ public class Ship : MonoBehaviour
 
     private void Start()
     {
+        if (GameController.instance == null) {
+            return;
+        }
         foodStored = initialFoodAmount;
         var foodPanel = GameController.instance.uIContoller.GetUIElement("Food");
         foreach (Transform child in foodPanel.transform)
