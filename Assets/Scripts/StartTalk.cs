@@ -29,10 +29,12 @@ public class StartTalk : MonoBehaviour
     {
         List<string> formated = new List<string>();
 
-        string[] blocks = script.text.Split(new string[] { "--\n" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] blocks = script.text.Split(new string[] { "--\n", "--\r\n", "--\r", "--\n\r" }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var block in blocks)
         {
+            
+            Debug.Log(block);
             formated.Add(block.Trim());
         }
 
@@ -46,12 +48,12 @@ public class StartTalk : MonoBehaviour
             if (block[0] == 'P')
             {
                 Debug.Log("Player " + block.Substring(2));
-                talkManager.PlayerSpeach(block.Substring(2));
+                talkManager.PlayerSpeach(block.Substring(2).Trim());
             }
             else if (block[0] == 'E')
             {
                 Debug.Log("Enemy " + block.Substring(2));
-                talkManager.EnemySpeach(block.Substring(2));
+                talkManager.EnemySpeach(block.Substring(2).Trim());
             }
             yield return new WaitUntil(() => !talkManager.talking);
         }

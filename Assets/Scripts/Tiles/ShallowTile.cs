@@ -12,6 +12,10 @@ public class ShallowTile : Tile
 
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
+        if (soundEffect != null)
+        {
+            soundEffect.Play();
+        }
         wait = true;
         field.Shift();
         return false;

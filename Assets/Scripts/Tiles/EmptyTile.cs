@@ -14,4 +14,12 @@ public class EmptyTile : Tile
         wait = false;
         return false; 
     }
+
+    public void PlayVortexSound()
+    {
+        if (soundEffect != null)
+        {
+            soundEffect.Play();
+        }
+    }
 }

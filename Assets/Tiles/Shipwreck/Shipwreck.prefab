@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9188390159576352307}
   - component: {fileID: 9188390159576352316}
   - component: {fileID: 9188390159576352317}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shipwreck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,6 +63,7 @@ MonoBehaviour:
   tileType: 0
   x: -1
   y: -1
+  soundEffect: {fileID: 0}
 --- !u!1001 &2834247772374355950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,9 +131,49 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8380157826906577798, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6733177361254619370, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1857309847194865932, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 281855664364225751, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
       propertyPath: m_Name
       value: WaterTile_Shipwreck
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800250516343163423, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849762623622064168, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700725330082129686, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1482797ef6ce31947b5b6aca6e202dbd, type: 3}
@@ -207,6 +248,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cd21b8802274060408cbd85076cd2419, type: 3}
       propertyPath: m_Name
       value: WaterTile_Empty
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cd21b8802274060408cbd85076cd2419, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd21b8802274060408cbd85076cd2419, type: 3}

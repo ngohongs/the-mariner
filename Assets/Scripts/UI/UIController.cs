@@ -9,6 +9,7 @@ using static System.TimeZoneInfo;
 
 public class UIController : MonoBehaviour
 {
+    public Talk talkManager;
     public void ShowElement(string name)
     {
         GameObject element = GetUIElement(name);
@@ -25,7 +26,7 @@ public class UIController : MonoBehaviour
         {
             element.SetActive(false);
         }
-    }   
+    }
 
     public void HideAllElemenets()
     {
@@ -59,5 +60,52 @@ public class UIController : MonoBehaviour
         {
             element.GetComponent<Dialogue>().DisplayText(text);
         }
+    }
+
+    public void DisplayCharacterDialogueText(string text)
+    {
+        talkManager.gameObject.SetActive(true);
+        talkManager.ShowBackground = false;
+
+        List<string> formated = new List<string>();
+
+        string[] blocks = text.Split(new string[] { "--\n", "--\r\n", "--\r", "--\n\r" }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var block in blocks)
+        {
+            Debug.Log(block);
+            formated.Add(block.Trim());
+        }
+
+        var formattedBlocks = formated.ToArray();
+        StartCoroutine(StartTalkDialog(formattedBlocks));
+
+    }
+
+    IEnumerator StartTalkDialog(string[] script)
+    {
+        foreach (string block in script)
+        {
+            if (block[0] == 'P')
+            {
+                talkManager.enemy.SetActive(false);
+                talkManager.player.SetActive(true);
+                Debug.Log("Player " + block.Substring(2));
+                talkManager.PlayerSpeach(block.Substring(2).Trim());
+            }
+            else if (block[0] == 'E')
+            {
+                talkManager.enemy.SetActive(true);
+                talkManager.player.SetActive(false);
+                Debug.Log("Enemy " + block.Substring(2));
+                talkManager.EnemySpeach(block.Substring(2).Trim());
+            }
+            yield return new WaitUntil(() => !talkManager.talking);
+        }
+
+        talkManager.ShowBackground = true;
+        talkManager.enemy.SetActive(true);
+        talkManager.player.SetActive(true);
+        talkManager.gameObject.SetActive(false);
     }
 }

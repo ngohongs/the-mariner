@@ -13,6 +13,7 @@ public enum TileType
     CurrentUp,
     Empty,
     Land,
+    Sand,
     Shallow,
     Shipwreck,
     Vortex,
@@ -24,6 +25,7 @@ public enum TileTypeShort
     Current,
     Empty,
     Land,
+    Sand,
     Shallow,
     Shipwreck,
     Vortex,
@@ -38,6 +40,7 @@ public enum TileCode : int
     CurrentUp = 'u',
     Empty = 'e',
     Land = 'i',
+    Sand = 'x',
     Shallow = 's',
     Shipwreck = 'w',
     Vortex = 'v',
@@ -53,6 +56,7 @@ public static class TileCodeTranslation
         {TileCode.CurrentUp, TileType.CurrentUp},
         {TileCode.Empty, TileType.Empty},
         {TileCode.Land, TileType.Land},
+        {TileCode.Sand, TileType.Sand},
         {TileCode.Shallow, TileType.Shallow},
         {TileCode.Shipwreck, TileType.Shipwreck},
         {TileCode.Vortex, TileType.Vortex},
@@ -66,4 +70,7 @@ public abstract class Tile : MonoBehaviour
     public abstract bool ApplyEffect(PlayingField field, out bool wait);
 
     public virtual bool IsMoveable(Ship ship) => true;
+    public virtual bool IsMoveable() => true;
+
+    public AudioSource soundEffect;
 }

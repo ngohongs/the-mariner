@@ -13,6 +13,8 @@ public class Tilemap : MonoBehaviour
     [Min(1)]
     public int height = 1;
 
+    public int end = 1;
+
     [Space]
     [Header("NEEDS TO BE IN SAME ORDER AS ENUM IN Tile.cs (i.e. IN ALPHABETICAL)")]
     public List<GameObject> tiles;
@@ -112,56 +114,63 @@ public class Tilemap : MonoBehaviour
         return map[i];
     }
 
-    public void Replace(int x, int y, TileType type)
+    public Tile Replace(int x, int y, TileType type)
     {
         int i = Index(x, y);
 
         Destroy(map[i].gameObject);
 
-        Insert(x, y, type);
+        return Insert(x, y, type);
     }
 
-    public void Insert(int x, int y, TileType type)
+    public Tile Insert(int x, int y, TileType type)
     {
-        Insert(Index(x, y), type);
+        return Insert(Index(x, y), type);
     }
 
-    public void Insert(int i, TileType type)
+    public Tile Insert(int i, TileType type)
     {
         map[i] = Instantiate(tiles[(int)type], transform).GetComponent<Tile>();
         map[i].name += "_(" + Col(i) + "," + Row(i) + ")";
         map[i].transform.localPosition = new Vector3(Col(i) + 0.5f, 0, Row(i) + 0.5f);
         map[i].x = Col(i);
         map[i].y = Row(i);
+        return map[i];
     }
 
     public void Load()
     {
         var config = template.text.Split(new[] { "\r\n", "\r", "\n", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
 
-        if (config.Length < 3)
+        if (config.Length < 4)
         {
             Debug.LogError("Error while loading - invalid template");
             return;
         }
+        
+        if (!Int32.TryParse(config[0], out int end))
+        {
+            Debug.LogError("Error while loading end from template");
+            return;
+        }
 
-        if (!Int32.TryParse(config[0], out int wid))
+        if (!Int32.TryParse(config[1], out int wid))
         {
             Debug.LogError("Error while loading width from template");
             return;
         }
 
-        if (!Int32.TryParse(config[1], out int hei))
+        if (!Int32.TryParse(config[2], out int hei))
         {
             Debug.LogError("Error while loading height from template");
             return;
         }
 
-        var stringMap = config[2..].Reverse();
+        var stringMap = config[3..].Reverse();
 
-        if (stringMap.Count() != hei)
+        if (stringMap.Count() != hei || end > hei)
         {
-            Debug.LogError("Error while loading height doesn't match");
+            Debug.LogError("Error while loading height doesn't match or is smaller than end");
             return;
         }
 
@@ -193,12 +202,12 @@ public class Tilemap : MonoBehaviour
 
         width = wid;
         height = hei;
+        this.end = end;
 
         map = new List<Tile>(new Tile[height * width]);
 
         for (int i = 0; i < tilemap.Count; i++)
         {
-            Debug.Log(tilemap[i]);
             Insert(i, tilemap[i]);
         }
 

@@ -58,18 +58,23 @@ public class PlayingField : MonoBehaviour
 
     private GameController gameController;
 
-
-    //ONDRA
-
+    public EndTalk endDialog;
+    public int beforeEndTrigger = 3;
+    private bool endPlayed = false;
 
     private CanvasGroup canvasGroup;
     private TextMeshProUGUI textfield;
 
     public float transitionTime = 3;
 
+    [SerializeField] private AudioSource clickOnTile;
 
     public static Action OnEndingEvent;
     
+    public AudioSource[] sailSounds;
+
+    public MoveSetDisplayer moveSetDisplayer;
+
     private void OnDrawGizmos()
     {
         if (tilemap == null)
@@ -181,17 +186,28 @@ public class PlayingField : MonoBehaviour
 
     private IEnumerator Prepare()
     {
+        if (PlayToTileCoords(0, shipY).y >= tilemap.end - beforeEndTrigger && endDialog != null && !endPlayed)
+        {
+            endPlayed = true;
+            Debug.Log("End talk");
+            endDialog.StartTalk();
+        }
+
         stopwatch.Restart();
         destination = null;
-        UpdateMoveSet();
+
+        var moves = UpdateMoveSet();
+        moveSetDisplayer.gameObject.SetActive(true);
+        moveSetDisplayer.SetPosition(ship.transform.position.x, ship.transform.position.z);
+        moveSetDisplayer.Show(moves);
+
+
+        
 
         while ((destination = GetDestination()) == null)
         {
             yield return null;
         }
-
-        // Click on a new tile
-        Memory.instance.Remember(destination.tileType);
         
 
         // Click on a tile that is not in the move set
@@ -219,6 +235,8 @@ public class PlayingField : MonoBehaviour
 
     private IEnumerator Action()
     {
+        moveSetDisplayer.gameObject.SetActive(false);
+        moveSetDisplayer.Hide();
         var coord = TileToPlayCoords(destination.x, destination.y);
 
         if (ship.activeSkills[(int)ESkill.GET_HEALTH]) {
@@ -248,8 +266,6 @@ public class PlayingField : MonoBehaviour
 
             if (tile == null)
                 break;
-
-            Memory.instance.Remember(tile.tileType);
         }
 
         state = State.Finish;
@@ -259,7 +275,7 @@ public class PlayingField : MonoBehaviour
 
     private bool IsShipAtTheEnd()
     {
-        return PlayToTileCoords(shipX, shipY).y == tilemap.height - 1;
+        return PlayToTileCoords(shipX, shipY).y == tilemap.end - 1;
     }
 
     private IEnumerator WaitAndSetFade() {
@@ -284,7 +300,7 @@ public class PlayingField : MonoBehaviour
             GameController.instance.NextScene();
         }
 
-        //ONDRA
+      // ondra
 
         if (IsGameOver())
         {
@@ -335,9 +351,18 @@ public class PlayingField : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Tile")))
             {
-                var tile = hit.transform.gameObject.GetComponent<Tile>();
+                clickOnTile.Play();
+                
+                var spot = hit.transform.gameObject.GetComponent<MoveTile>();
+
+                if (spot == null || spot.blocked)
+                    return null;
+
+                var tileObject = TileIn(shipX + spot.direction.x, shipY + spot.direction.y);
+
+                var tile = tileObject.GetComponent<Tile>();
 
                 if (tile != null)
                 {
@@ -379,6 +404,16 @@ public class PlayingField : MonoBehaviour
         completed++;
     }
 
+    public void PlaySailSound()
+    {
+        if (sailSounds.Length > 0)
+        {
+            int randomSourceIndex = UnityEngine.Random.Range(0, sailSounds.Length);
+            AudioSource selectedSource = sailSounds[randomSourceIndex];
+            selectedSource.Play();
+        }
+    }
+
     void Move(int x, int y, bool tween = true)
     {
         Debug.Log("Move : " + x + " " + y + " " + stopwatch.ElapsedMilliseconds / 1000 );
@@ -397,12 +432,11 @@ public class PlayingField : MonoBehaviour
 
 
                 var sequence = DOTween.Sequence();
+                sequence.AppendCallback(() => PlaySailSound());
                 sequence.Append(ship.transform.DORotate(new Vector3(0, angle, 0), moveDuration / 2).SetEase(Ease.OutSine));
                 sequence.Append(ship.transform.DORotate(Vector3.zero, moveDuration / 2).SetEase(Ease.InSine));
             }
-
         }
-   
         else
             ship.transform.position = new Vector3(x + 0.5f + xOffset, 0, y + 0.5f + yOffset);
 
@@ -416,9 +450,11 @@ public class PlayingField : MonoBehaviour
         Move(shipX + dir.x, shipY + dir.y);
     }
 
-    public void UpdateMoveSet()
+    public bool[] UpdateMoveSet()
     {
         List<Tile> result = new List<Tile>();
+
+        bool[] moveBools = new bool[(int)Direction.None + 1];
 
         for (Direction dir = 0; dir < Direction.None; dir++) 
         {
@@ -427,20 +463,32 @@ public class PlayingField : MonoBehaviour
             var y = shipY + t.y;
 
             if (!IsInPlayingField(x, y) || !IsInTilemap(x, y))
+            {
+                moveBools[(int)dir] = false;
                 continue;
+            }
 
             var tile = TileIn(x, y);
 
-            if (!tile.IsMoveable(ship))
+            if (!tile.IsMoveable())
+            {
+                moveBools[(int)dir] = false;
                 continue;
-
+            }
+            moveBools[(int)dir] = true;
             result.Add(tile);            
         }
 
         if (shipY == playingHeight - 1 && IsInTilemap(shipX, shipY))
+        {
+            moveBools[(int)Direction.None] = true; 
             result.Add(TileIn(shipX, shipY));
+        }
+        else
+            moveBools[(int)Direction.None] = false;
 
         moveSet = result;
+        return moveBools;
     }
 
     private Tile TileIn(int x, int y)
@@ -464,13 +512,13 @@ public class PlayingField : MonoBehaviour
         return new Vector2Int(x - xOffset, y - yOffset - completed); 
     }
 
-    bool IsInPlayingField(int x, int y)
+    public bool IsInPlayingField(int x, int y)
     {
         return 0 <= x && x < playingWidth &&
                0 <= y && y < playingHeight;
     }
 
-    bool IsInTilemap(int x, int y)
+    public bool IsInTilemap(int x, int y)
     {
         var coord = PlayToTileCoords(x, y);
         return 0 <= coord.x && coord.x < tilemap.width &&
