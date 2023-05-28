@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine.Tilemaps;
 using System;
 using System.Linq;
+using UnityEditor.SceneManagement;
 
 public class Tilemap : MonoBehaviour
 {
@@ -221,7 +222,8 @@ public class TilemapInspector : Editor
 {
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
+        EditorGUI.BeginChangeCheck(); // Start recording changes
+        base.OnInspectorGUI(); // Draw the default inspector
 
         Tilemap tilemap = (Tilemap)target;
 
@@ -246,6 +248,12 @@ public class TilemapInspector : Editor
             Debug.Log("Emptying tilemap");
             tilemap.Delete();
         }
+
+        if (EditorGUI.EndChangeCheck()) // Check if any changes were made
+        {
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene()); // Mark scene as dirty
+        }
     }
 }
+
 #endif
