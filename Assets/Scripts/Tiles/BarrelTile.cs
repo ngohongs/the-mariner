@@ -8,7 +8,7 @@ public class BarrelTile : Tile
 {
     public int foodAmount = 8;
     public GameObject textOverlay;
-
+    private bool eaten = false;
     private TMP_Text _textOverlayText;
     
     private void TriggerOverlay(Character c) {
@@ -30,10 +30,18 @@ public class BarrelTile : Tile
 
     public override bool ApplyEffect(PlayingField field, out bool wait)
     {
+        if (eaten)
+        {
+            wait = false;
+            return false;
+        }
+
         if (soundEffect != null)
         {
             soundEffect.Play();
         }
+
+        eaten = true;
         field.ship.AddFood(foodAmount);
         wait = false;
         transform.GetChild(0).gameObject.SetActive(false);
