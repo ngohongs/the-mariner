@@ -12,6 +12,8 @@ using Debug = UnityEngine.Debug;
 
 public class PlayingField : MonoBehaviour
 {
+    
+
     public bool isStatic = false;
 
     [Header("Tilemap")]
@@ -75,6 +77,7 @@ public class PlayingField : MonoBehaviour
 
     public MoveSetDisplayer moveSetDisplayer;
 
+
     private void OnDrawGizmos()
     {
         if (tilemap == null)
@@ -106,7 +109,7 @@ public class PlayingField : MonoBehaviour
         canvasGroup = GameController.instance.uIContoller.transform.GetChild(2).GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0.0f;
         textfield = canvasGroup.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-
+        
         DrawPlayingFieldBorder();
 
         if (tilemap)
@@ -308,19 +311,21 @@ public class PlayingField : MonoBehaviour
                 Move(playingWidth/2, playingHeight/2, false);
                 ship.activeSkills[(int)ESkill.DEATH_SKIP] = false;
                 Ship.OnShipRessurected?.Invoke();
+                Debug.Log("skill");
             }
             else {
                 Debug.Log("End");
 
-                var text = !IsInPlayingField(shipX, shipY) ? "Out" : "Hungry";
+                var text = !IsInPlayingField(shipX, shipY) ? "The mother nature thrust you into the unknown. As your crew is afraid of sea monsters, they've abandoned the ship, leaving you to brave it alone. Godspeed, with this impossible task Mariner!" : "You ran out of food and the crew couldn't stomach it no more. They staged a full-on mutiny and tied you up to a  palm tree. Maybe next time!";
                 textfield.text = text;
-
+                Debug.Log(text);
                 canvasGroup.DOFade(1f, 2f).OnComplete(() =>
                 {
+                   
                     textfield.gameObject.SetActive(true);
                 });
 
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(6f);
 
                 textfield.gameObject.SetActive(false);
 

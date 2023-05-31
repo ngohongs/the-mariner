@@ -4,8 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+using UnityEngine.Audio;
+
 public class Talk : MonoBehaviour
 {
+    
+
     public GameObject player;
     public GameObject enemy;
 
@@ -38,6 +44,9 @@ public class Talk : MonoBehaviour
         talking = true;
         dialogue.DisplayText(text);
         enemy.transform.DOShakePosition(2, new Vector3(0.0f, 10.0f, 0.0f), 10, 90, true, false).SetUpdate(true).SetLoops(-1);
+
+
+       
     }
 
 
@@ -47,5 +56,9 @@ public class Talk : MonoBehaviour
         talking = true;
         dialogue.DisplayText(text);
         player.transform.DOShakePosition(2, new Vector3(0.0f, 10.0f, 0.0f), 10, 90, true, false).SetUpdate(true).SetLoops(-1);
+
+
+
+      
     }
 }
