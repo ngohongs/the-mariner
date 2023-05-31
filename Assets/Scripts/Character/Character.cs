@@ -12,13 +12,13 @@ public class Character {
             "The Chef",
             ESkill.CHEF,
             "",
-            "The Chef is a great cook with a keen sense for spotting barrels with extra food. She'll sometimes share her finds with you!"
+            "The Chef is a great cook with a keen sense for spotting barrels with extra food. He'll sometimes share her finds with you!"
         ),
         new Character(
             "Machio-san",
             ESkill.STREAM_SKIP,
             "",
-            "Machio-san can help your ship push through treacherous currents, but he'll need a small fee of one piece of food to do so."
+            "Machio-san can help your ship push through treacherous currents, but he'll need a small fee of extra food to do so."
         ),
         new Character(
             "Hades",

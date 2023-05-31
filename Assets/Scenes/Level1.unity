@@ -15968,6 +15968,22 @@ PrefabInstance:
       propertyPath: _activeCharactersLayoutGroup
       value: 
       objectReference: {fileID: 2008985203}
+    - target: {fileID: 1658664701781434280, guid: cf0737641fd3a364fbb6114d0eda0a38, type: 3}
+      propertyPath: wantedCharacters.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658664701781434280, guid: cf0737641fd3a364fbb6114d0eda0a38, type: 3}
+      propertyPath: wantedCharacters.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658664701781434280, guid: cf0737641fd3a364fbb6114d0eda0a38, type: 3}
+      propertyPath: wantedCharacters.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658664701781434280, guid: cf0737641fd3a364fbb6114d0eda0a38, type: 3}
+      propertyPath: wantedCharacters.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0737641fd3a364fbb6114d0eda0a38, type: 3}
 --- !u!1001 &3388571502803005520

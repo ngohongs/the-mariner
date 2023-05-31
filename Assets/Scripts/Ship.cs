@@ -24,6 +24,7 @@ public class Ship : MonoBehaviour
     public int cooldown = 2;
     public int cooldownCounter = 0;
     
+    public Boolean[] wantedCharacters = new bool[Character._allCharacters.Count];
     public Sprite[] _imageCharacters = new Sprite[4];
     public int foodStored
 
@@ -85,7 +86,6 @@ public class Ship : MonoBehaviour
         } else if(skill == ESkill.STREAM_SKIP && !activeSkills[(int)skill]) {
             foodConsumption -= 1;
         }
-        
     }
     
     public void AddActiveCharacter(Character c) {

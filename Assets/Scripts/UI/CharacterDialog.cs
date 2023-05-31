@@ -19,12 +19,12 @@ public class CharacterDialog : MonoBehaviour {
     public Sprite imagetest;
     public Sprite[] _imageCharacters = new Sprite[4];
 
+    
     private List<GameObject> _objectsShown = new List<GameObject>(4);
     
     private void AddCharacterToShip(Character c) {
         _ship.GetComponent<Ship>().AddCharacter(c);
         this.transform.gameObject.SetActive(false);
-        Debug.Log("dwd");
     }
 
     private void OnEnable() {
@@ -59,8 +59,10 @@ public class CharacterDialog : MonoBehaviour {
         
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(true);
+
+        int index = 0;
         foreach (var c in Character._allCharacters) {
-            if (!_ship.HasCharacter(c)) {
+            if (!_ship.HasCharacter(c) && _ship.wantedCharacters[index++]) {
                 
                 if(cCount > 1) pageCount = 1;
                 
@@ -86,6 +88,7 @@ public class CharacterDialog : MonoBehaviour {
                 addCharacterButtonText.transform.GetComponent<TextMeshProUGUI>().text = c.Name;
                 cCount++;
             }
+            
             transform.GetChild(1).gameObject.SetActive(false);
         }
     }

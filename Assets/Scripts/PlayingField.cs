@@ -144,6 +144,17 @@ public class PlayingField : MonoBehaviour
             finishDuration = Mathf.Max(shiftDuration, moveDuration);
     }
 
+
+    private void OnEnable() {
+        ActiveCharacterEventManager.OnCharacterClicked += ActiveCharacterClicked;
+    }
+
+    private void ActiveCharacterClicked(ESkill skill) {
+        if (skill == ESkill.GET_HEALTH) {
+            var moves = UpdateMoveSet();
+            moveSetDisplayer.Show(moves);
+        }
+    }
     private void DrawPlayingFieldBorder()
     {
         var lineRenderer = gameObject.AddComponent<LineRenderer>();

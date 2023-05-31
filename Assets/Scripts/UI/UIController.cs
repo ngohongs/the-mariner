@@ -62,8 +62,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void DisplayCharacterDialogueText(string text)
-    {
+    public void DisplayCharacterDialogueText(string text) {
         talkManager.gameObject.SetActive(true);
         talkManager.ShowBackground = false;
 
@@ -82,8 +81,7 @@ public class UIController : MonoBehaviour
 
     }
 
-    IEnumerator StartTalkDialog(string[] script)
-    {
+    IEnumerator StartTalkDialog(string[] script) {
         foreach (string block in script)
         {
             if (block[0] == 'P')
