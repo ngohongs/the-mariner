@@ -30,7 +30,7 @@ public class Character {
             "The Diplomat",
             ESkill.GET_HEALTH,
             "",
-            "When you visit an unknown land, the Diplomat will convince a few people to join your crew."
+            "Diplomat will guide you through the land without harm. It will cost you few turns though."
         ),
     };
     
