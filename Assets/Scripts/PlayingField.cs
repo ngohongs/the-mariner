@@ -324,7 +324,7 @@ public class PlayingField : MonoBehaviour
             else {
                 Debug.Log("End");
 
-                var text = !IsInPlayingField(shipX, shipY) ? "The mother nature thrust you into the unknown. As your crew is afraid of sea monsters, they've abandoned the ship, leaving you to brave it alone. Godspeed, with this impossible task Mariner!" : "You ran out of food and the crew couldn't stomach it no more. They staged a full-on mutiny and tied you up to a  palm tree. Maybe next time!";
+                var text = !IsInPlayingField(shipX, shipY) ? "The mother nature thrust you into the unknown. Since your crew is afraid of sea monsters, they've abandoned the ship, leaving you to brave it alone. Godspeed, with this impossible task Mariner!" : "You ran out of food and the crew couldn't stomach it no more. They staged a full-on mutiny and tied you up to a  palm tree. Maybe next time!";
                 textfield.text = text;
                 Debug.Log(text);
                 canvasGroup.DOFade(1f, 2f).OnComplete(() =>
