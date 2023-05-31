@@ -38,11 +38,11 @@ public class Talk : MonoBehaviour
         }
     }
 
-    public void EnemySpeach(string text)
+    public void EnemySpeach(string text, bool pause = true)
     {
         Debug.Log("ENEMY TALK START");
         talking = true;
-        dialogue.DisplayText(text);
+        dialogue.DisplayText(text, pause);
         enemy.transform.DOShakePosition(2, new Vector3(0.0f, 10.0f, 0.0f), 10, 90, true, false).SetUpdate(true).SetLoops(-1);
 
 
@@ -50,11 +50,11 @@ public class Talk : MonoBehaviour
     }
 
 
-    public void PlayerSpeach(string text)
+    public void PlayerSpeach(string text, bool pause = true)
     {
         Debug.Log("PLAYER TALK START");
         talking = true;
-        dialogue.DisplayText(text);
+        dialogue.DisplayText(text, pause);
         player.transform.DOShakePosition(2, new Vector3(0.0f, 10.0f, 0.0f), 10, 90, true, false).SetUpdate(true).SetLoops(-1);
 
 

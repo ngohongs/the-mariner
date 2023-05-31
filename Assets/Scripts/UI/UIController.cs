@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void DisplayCharacterDialogueText(string text) {
+    public void DisplayCharacterDialogueText(string text, bool pause = true, Action action = null) {
         talkManager.gameObject.SetActive(true);
         talkManager.ShowBackground = false;
 
@@ -77,11 +77,11 @@ public class UIController : MonoBehaviour
         }
 
         var formattedBlocks = formated.ToArray();
-        StartCoroutine(StartTalkDialog(formattedBlocks));
+        StartCoroutine(StartTalkDialog(formattedBlocks, pause, action));
 
     }
 
-    IEnumerator StartTalkDialog(string[] script) {
+    IEnumerator StartTalkDialog(string[] script, bool pause = true, Action action = null) {
         foreach (string block in script)
         {
             if (block[0] == 'P')
@@ -89,14 +89,14 @@ public class UIController : MonoBehaviour
                 talkManager.enemy.SetActive(false);
                 talkManager.player.SetActive(true);
                 Debug.Log("Player " + block.Substring(2));
-                talkManager.PlayerSpeach(block.Substring(2).Trim());
+                talkManager.PlayerSpeach(block.Substring(2).Trim(), pause);
             }
             else if (block[0] == 'E')
             {
                 talkManager.enemy.SetActive(true);
                 talkManager.player.SetActive(false);
                 Debug.Log("Enemy " + block.Substring(2));
-                talkManager.EnemySpeach(block.Substring(2).Trim());
+                talkManager.EnemySpeach(block.Substring(2).Trim(), pause);
             }
             yield return new WaitUntil(() => !talkManager.talking);
         }
@@ -105,5 +105,7 @@ public class UIController : MonoBehaviour
         talkManager.enemy.SetActive(true);
         talkManager.player.SetActive(true);
         talkManager.gameObject.SetActive(false);
+        
+        action?.Invoke();
     }
 }

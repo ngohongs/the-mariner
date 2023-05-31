@@ -18,13 +18,14 @@ public class Dialogue : MonoBehaviour
     public AudioSource[] audioSources;
     //
 
-
+    private bool pause = true;
 
 
     // Update is called once per frame
     void Update()
     {
-        Time.timeScale = 0.0f;
+        if (pause)
+            Time.timeScale = 0.0f;
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             && !pauseMenu.activeSelf)
@@ -90,8 +91,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    public void DisplayText(string text)
+    public void DisplayText(string text, bool pause = true)
     {
+        this.pause = pause;
         GameController.instance.uIContoller.ShowElement("Screen");
         lines = new List<string>(text.Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None));
         gameObject.SetActive(true);
