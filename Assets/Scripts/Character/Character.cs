@@ -24,7 +24,7 @@ public class Character {
             "Hades",
             ESkill.DEATH_SKIP,
             "",
-            "Hades is a master of resurrection, but be warned: their magic comes with a catch. If you sink, they'll bring you back to life, but you'll lose all your other crew members in the process. It's like hitting the reset button, but with extra pain and suffering!"
+            "Hades is a master of resurrection. He will bring you back to life, but only once."
         ),
         new Character(
             "The Diplomat",

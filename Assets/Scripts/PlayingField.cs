@@ -146,7 +146,7 @@ public class PlayingField : MonoBehaviour
 
 
     private void OnEnable() {
-        ActiveCharacterEventManager.OnCharacterClicked += ActiveCharacterClicked;
+        ActiveCharacterEventManager.OnActiveCharacterPlayingField += ActiveCharacterClicked;
     }
 
     private void ActiveCharacterClicked(ESkill skill) {

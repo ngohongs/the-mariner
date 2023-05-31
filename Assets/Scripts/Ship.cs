@@ -86,6 +86,8 @@ public class Ship : MonoBehaviour
         } else if(skill == ESkill.STREAM_SKIP && !activeSkills[(int)skill]) {
             foodConsumption -= 1;
         }
+        
+        ActiveCharacterEventManager.CharacterPlayingField(skill);
     }
     
     public void AddActiveCharacter(Character c) {
