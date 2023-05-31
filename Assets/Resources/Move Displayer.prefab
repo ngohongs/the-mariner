@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 3388571502839319369}
   - component: {fileID: 3388571502839319373}
   - component: {fileID: 3388571502839319374}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: BotLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571502930400583
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 3388571502930400584}
   - component: {fileID: 3388571502930400588}
   - component: {fileID: 3388571502930400589}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: MidLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571502979167596
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 3388571503215635159}
   - component: {fileID: 3388571503215635163}
   - component: {fileID: 3388571503215635164}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571503401859273
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 3388571503401859274}
   - component: {fileID: 3388571503401859278}
   - component: {fileID: 3388571503401859279}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: BotRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +813,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571503434722991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 3388571503750469592}
   - component: {fileID: 3388571503750469596}
   - component: {fileID: 3388571503750469597}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: MidRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1139,7 +1139,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571504189539004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 3388571504189539005}
   - component: {fileID: 3388571504189538977}
   - component: {fileID: 3388571504189538978}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: BotMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,7 +1269,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571504250795132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1284,7 @@ GameObject:
   - component: {fileID: 3388571504250795133}
   - component: {fileID: 3388571504250795105}
   - component: {fileID: 3388571504250795106}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: MidMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1399,7 +1399,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 1.110223e-16, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571504377954543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,7 +1815,7 @@ GameObject:
   - component: {fileID: 3388571504528749701}
   - component: {fileID: 3388571504528749705}
   - component: {fileID: 3388571504528749706}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TopMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1930,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}
 --- !u!1 &3388571504560625409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2043,7 @@ GameObject:
   - component: {fileID: 3388571504599518250}
   - component: {fileID: 3388571504599518254}
   - component: {fileID: 3388571504599518255}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2158,4 +2158,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.45, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -4.1, z: 0}

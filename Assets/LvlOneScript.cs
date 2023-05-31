@@ -7,6 +7,9 @@ public class LvlOneScript : MonoBehaviour
     public TextAsset text;
     void Start()
     {
+        if (text == null)
+            return;
+
         GameController.instance.uIContoller.DisplayCharacterDialogueText(text.text); 
     }
 

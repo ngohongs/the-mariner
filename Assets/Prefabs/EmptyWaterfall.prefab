@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594936901725435464}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.47000027, y: -0.49999994, z: 9.205}
+  m_LocalPosition: {x: 0.4699998, y: -0.5, z: 11.285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50,6 +50,7 @@ MonoBehaviour:
   tileType: 0
   x: -1
   y: -1
+  soundEffect: {fileID: 0}
 --- !u!65 &1910218849007820866
 BoxCollider:
   m_ObjectHideFlags: 0
