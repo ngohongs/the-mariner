@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using System;
-using UnityEngine.EventSystems;
+using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
@@ -13,6 +12,14 @@ public class Dialogue : MonoBehaviour
     public int index = 0;
     public GameObject pauseMenu;
     private bool inDialog = false;
+
+
+    // ondra
+    public AudioSource[] audioSources;
+    //
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -37,6 +44,10 @@ public class Dialogue : MonoBehaviour
     void StartDialogue()
     {
         inDialog = true;
+
+        int randomIndex = UnityEngine.Random.Range(0, audioSources.Length);
+        audioSources[randomIndex].Play();
+
         index = 0;
         textCompoment.text = "";
         StartCoroutine(TypeLines());
@@ -51,6 +62,8 @@ public class Dialogue : MonoBehaviour
                 yield return null;
             }
             textCompoment.text += letter;
+
+
             yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
@@ -59,6 +72,10 @@ public class Dialogue : MonoBehaviour
     {
         if (index < lines.Count - 1)
         {
+
+            int randomIndex = UnityEngine.Random.Range(0, audioSources.Length);
+            audioSources[randomIndex].Play();
+
             index++;
             textCompoment.text = "";
             StartCoroutine(TypeLines());
@@ -69,14 +86,14 @@ public class Dialogue : MonoBehaviour
             GameController.instance.uIContoller.HideElement("Screen");
             Time.timeScale = 1.0f;
             inDialog = false;
-            
+
         }
     }
 
     public void DisplayText(string text)
     {
         GameController.instance.uIContoller.ShowElement("Screen");
-        lines = new List<string>(text.Split(new []{ Environment.NewLine, "\n"}, StringSplitOptions.None));
+        lines = new List<string>(text.Split(new[] { Environment.NewLine, "\n" }, StringSplitOptions.None));
         gameObject.SetActive(true);
         StartDialogue();
     }
