@@ -301,14 +301,11 @@ public class PlayingField : MonoBehaviour
 
         yield return new WaitForSeconds(finishDuration);
 
-        if (IsShipAtTheEnd() && isLastLevel) {
+         if (IsShipAtTheEnd())
+        {
             OnEndingEvent?.Invoke();
             StartCoroutine(WaitAndSetFade());
-            
-        } else if (IsShipAtTheEnd())
-        {
-            Debug.Log("End");
-            GameController.instance.NextScene();
+            // GameController.instance.NextScene();
         }
 
       // ondra
