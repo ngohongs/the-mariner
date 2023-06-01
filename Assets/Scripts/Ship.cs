@@ -95,7 +95,7 @@ public class Ship : MonoBehaviour
         
         parent.transform.GetComponent<Image>().overrideSprite = _imageCharacters[(int) c.Skill];
         var header = parent.transform.GetChild(0);
-        header.GetComponent<TextMeshProUGUI>().text = c.Name;
+        //header.GetComponent<TextMeshProUGUI>().text = c.Name;
         
         var btn = parent.transform.GetComponent<Button>();
         var panel = parent.transform.GetChild(1);

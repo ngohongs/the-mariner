@@ -40,7 +40,7 @@ public class BarrelTile : Tile
         {
             soundEffect.Play();
         }
-
+        textOverlay.SetActive(false);
         eaten = true;
         field.ship.AddFood(foodAmount);
         wait = false;
