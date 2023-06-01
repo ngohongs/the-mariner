@@ -12,6 +12,19 @@ public class MoveTile : MonoBehaviour
     public Vector2Int direction;
 
     private bool _blocked = false;
+
+    private bool _middle = false;
+
+    public bool middle
+    {
+        get { return _middle; }
+        set
+        {
+            _middle = value;
+            renderer.material = value ? empty : noWay;
+        }
+    }
+    
     public bool blocked {
         get { 
             return _blocked; 
@@ -36,6 +49,11 @@ public class MoveTile : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (middle)
+        {
+            renderer.material = _blocked ? empty : noWay;
+            return;
+        }
         renderer.material = _blocked ? noWay : empty;
     }
 }

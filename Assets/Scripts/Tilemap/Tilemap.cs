@@ -1,11 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.Tilemaps;
 using System;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+#endif
 
 public class Tilemap : MonoBehaviour
 {

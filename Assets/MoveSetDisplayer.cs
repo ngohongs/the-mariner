@@ -26,6 +26,8 @@ public class MoveSetDisplayer : MonoBehaviour
         for (Direction dir = 0; dir <= Direction.None; dir++)
         {
             tiles[(int)dir].blocked = !moveSet[(int)dir];
+            if (dir == Direction.None)
+                tiles[(int)dir].middle = true;
         }
     }
 
