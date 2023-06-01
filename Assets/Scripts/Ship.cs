@@ -99,6 +99,9 @@ public class Ship : MonoBehaviour
         
         var btn = parent.transform.GetComponent<Button>();
         var panel = parent.transform.GetChild(1);
+
+        var hades = parent.transform.GetComponent<HadesScriptkekw>();
+        hades.isHades = c.Skill == ESkill.DEATH_SKIP;
         
         if (c.Skill == ESkill.STREAM_SKIP || c.Skill == ESkill.GET_HEALTH) {
             btn.onClick.AddListener( () => {
@@ -129,10 +132,6 @@ public class Ship : MonoBehaviour
         for (var i = 0; i < (int)ESkill.COUNT; i++) {
             this.skills[i] = false;
             this.activeSkills[i] = false;
-        }
-
-        foreach (Transform child in _activeCharactersLayoutGroup.transform) {
-            GameObject.Destroy(child.gameObject);
         }
     }
     

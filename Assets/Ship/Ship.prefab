@@ -488,7 +488,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0b954f0771e9f7a46be78105defef8da, type: 3}
   - {fileID: 21300000, guid: fff8cd52b5e85ec409bfc3962d371e32, type: 3}
   foodConsumption: 1
-  skills: 0000
+  skills: 00000000
   activeSkills: 00000000
   field: {fileID: 0}
   foodUI: {fileID: 0}
