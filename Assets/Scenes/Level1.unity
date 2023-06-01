@@ -2765,7 +2765,7 @@ MonoBehaviour:
   - {fileID: 8717981177262793220, guid: 87932c72d0526274ab5a436fd73a6398, type: 3}
   - {fileID: 6923396022767943698, guid: 4e0d50b5cf2302d4aaf587a396d307a0, type: 3}
   distance: 10
-  spacicng: 1
+  spacicng: 0.5
   border: 1.2
 --- !u!1 &227297045
 GameObject:
