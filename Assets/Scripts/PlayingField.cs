@@ -94,6 +94,12 @@ public class PlayingField : MonoBehaviour
 
         foreach (var m in moveSet)
             Gizmos.DrawSphere(new Vector3(m.x + 0.5f, 0, m.y + 0.5f - completed), 0.25f);
+
+        Gizmos.color = Color.black;
+        for (int i = 0; i < tilemap.width; i++)
+        {
+            Gizmos.DrawSphere(new Vector3(i + 0.5f, 0.5f, 0.5f  + tilemap.end - beforeEndTrigger - completed) + o, 0.5f);
+        }
     }
 
     // Start is called before the first frame update

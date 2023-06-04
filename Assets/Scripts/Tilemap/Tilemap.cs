@@ -45,6 +45,12 @@ public class Tilemap : MonoBehaviour
                 Gizmos.DrawLine(start, end);
             }
         }
+
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < width; i++)
+        {
+            Gizmos.DrawSphere(new Vector3(i + 0.5f , 0.5f, end + 0.5f) + o, 0.25f);
+        }
     }
 
     private void Start()
