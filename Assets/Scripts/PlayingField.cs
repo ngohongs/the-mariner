@@ -340,7 +340,7 @@ public class PlayingField : MonoBehaviour
                 yield return new WaitForSeconds(1);
                 canvasGroup.alpha = 0;
 
-                GameController.instance.Restart();
+                GameController.instance.RestartLevel();
             }
         }
 
