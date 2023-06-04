@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BarrelTile : Tile
 {
@@ -10,10 +11,19 @@ public class BarrelTile : Tile
     public GameObject textOverlay;
     private bool eaten = false;
     private TMP_Text _textOverlayText;
-    
+
+    public float bonus = 50f;
+    public int diceSize = 3;
+
+
     private void TriggerOverlay(Character c) {
         if (c.Skill == ESkill.CHEF) {
             _textOverlayText = textOverlay.GetComponent<TMP_Text>();
+            int change = Random.Range(0, diceSize);
+            if (change == 0)
+            {
+                foodAmount = (int)((1 + bonus / 100) * foodAmount);
+            }
             _textOverlayText.text = foodAmount.ToString();
             textOverlay.SetActive(true);
         }
