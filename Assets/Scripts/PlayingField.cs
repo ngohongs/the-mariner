@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Debug = UnityEngine.Debug;
+using System.Linq;
 
 public class PlayingField : MonoBehaviour
 {
@@ -215,8 +216,13 @@ public class PlayingField : MonoBehaviour
         moveSetDisplayer.SetPosition(ship.transform.position.x, ship.transform.position.z);
         moveSetDisplayer.Show(moves);
 
-
-        
+        if (moves.All(b => !b) && !ship.skills[(int)ESkill.GET_HEALTH])
+        {
+            moveSetDisplayer.gameObject.SetActive(false);
+            state = State.Finish;
+            stateCoroutine = null;
+            yield break;
+        }
 
         while ((destination = GetDestination()) == null)
         {
@@ -340,7 +346,7 @@ public class PlayingField : MonoBehaviour
                 yield return new WaitForSeconds(1);
                 canvasGroup.alpha = 0;
 
-                GameController.instance.Restart();
+                GameController.instance.RestartLevel();
             }
         }
 

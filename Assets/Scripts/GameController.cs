@@ -133,4 +133,11 @@ public class GameController : MonoBehaviour
         uIContoller.ShowElement("Main Menu");
         Unpause();
     }
+
+    public void RestartLevel()
+    {
+        DOTween.KillAll();
+        SceneManager.LoadScene(sceneIndex);
+        Unpause();
+    }
 }
