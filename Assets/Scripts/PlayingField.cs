@@ -331,6 +331,12 @@ public class PlayingField : MonoBehaviour
                 Move(playingWidth/2, playingHeight/2, false);
                 ship.activeSkills[(int)ESkill.DEATH_SKIP] = false;
                 Ship.OnShipRessurected?.Invoke();
+                foreach (Direction direction in Enum.GetValues(typeof(Direction)))
+                {
+                    var offset = DirTranslation.DirToVec[(int)direction];
+                    var tileCoord = PlayToTileCoords(shipX +  offset.x, shipY + offset.y);
+                    tilemap.Replace(tileCoord.x, tileCoord.y, TileType.Empty);
+                }
                 Debug.Log("skill");
             }
             else {
