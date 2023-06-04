@@ -1,22 +1,19 @@
 16
-5 21
+5 18
 xxxxx
 xxxxx
 xxxxx
 xxxxx
 xxxxx
+llrll
+rllrr
 ldddr
-luedr
-ldddr
-leudr
-ldddr
-luedr
+ldeur
+ddddd
+duddd
 eeeee
-reeel
-reeel
-reeel
-reeel
-reeel
+ddddd
+rdddl
 reeel
 reeel
 reeel

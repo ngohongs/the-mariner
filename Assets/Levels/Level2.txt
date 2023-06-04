@@ -1,5 +1,5 @@
 60
-11 71
+11 64
 xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
@@ -11,13 +11,6 @@ xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
-dddddeddded
-eueueeeubue
-eueeddeeeue
-ebevvvvvebe
-ddedddddedd
-veeevvveeev
-ddeeeeeeeuu
 errrueellle
 llrreeellrr
 eueeeeeeede
