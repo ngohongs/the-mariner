@@ -321,7 +321,7 @@ public class PlayingField : MonoBehaviour
 
         if (IsGameOver())
         {
-            if (ship.activeSkills[(int)ESkill.DEATH_SKIP]) {
+            if (!ship.NoFood() && ship.activeSkills[(int)ESkill.DEATH_SKIP]) {
                 Move(playingWidth/2, playingHeight/2, false);
                 ship.activeSkills[(int)ESkill.DEATH_SKIP] = false;
                 Ship.OnShipRessurected?.Invoke();
