@@ -78,6 +78,7 @@ public class PlayingField : MonoBehaviour
 
     public MoveSetDisplayer moveSetDisplayer;
 
+    private bool warned = false;
 
     private void OnDrawGizmos()
     {
@@ -171,8 +172,8 @@ public class PlayingField : MonoBehaviour
         lineRenderer.startWidth = 0.2f;
         lineRenderer.endWidth = 0.2f;
         lineRenderer.positionCount = 6;
- 
-        ColorUtility.TryParseHtmlString("#ffb12e", out Color color);
+
+        UnityEngine.ColorUtility.TryParseHtmlString("#ffb12e", out Color color);
         lineRenderer.material.color = color;
 
         var offset = new Vector3(xOffset, 0, yOffset);
@@ -216,6 +217,13 @@ public class PlayingField : MonoBehaviour
 
         stopwatch.Restart();
         destination = null;
+
+        if (ship.foodStored <= playingHeight && !warned)
+        {
+            warned = true;
+            GameController.instance.uIContoller.DisplayDialogueText("We are running low on food, captain!");
+        }
+
 
         var moves = UpdateMoveSet();
         moveSetDisplayer.gameObject.SetActive(true);
