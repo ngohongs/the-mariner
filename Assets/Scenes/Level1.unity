@@ -1086,7 +1086,7 @@ MonoBehaviour:
   shiftDuration: 0.5
   moveDuration: 0.5
   endDialog: {fileID: 1507059417}
-  beforeEndTrigger: 10
+  beforeEndTrigger: 7
   transitionTime: 3
   clickOnTile: {fileID: 907911890}
   sailSounds:
