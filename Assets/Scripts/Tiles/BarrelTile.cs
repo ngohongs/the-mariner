@@ -9,6 +9,7 @@ public class BarrelTile : Tile
 {
     public int foodAmount = 8;
     public GameObject textOverlay;
+    public GameObject textPrefab;
     private bool eaten = false;
     private TMP_Text _textOverlayText;
 
@@ -17,20 +18,27 @@ public class BarrelTile : Tile
 
 
     private void TriggerOverlay(Character c) {
+
+        var overlay = Instantiate(textPrefab, textOverlay.transform);
+        
         if (c.Skill == ESkill.CHEF) {
-            _textOverlayText = textOverlay.GetComponent<TMP_Text>();
             int change = Random.Range(0, diceSize);
             if (change == 0)
             {
                 foodAmount = (int)((1 + bonus / 100) * foodAmount);
             }
+            _textOverlayText = overlay.GetComponent<TMP_Text>();
             _textOverlayText.text = foodAmount.ToString();
-            textOverlay.SetActive(true);
+            
         }
     }
 
     private void OnEnable() {
         ActiveCharacterEventManager.OnCharacterAdded += TriggerOverlay;
+    }
+
+    private void OnDisable() {
+        ActiveCharacterEventManager.OnCharacterAdded -= TriggerOverlay;
     }
 
     private void Awake()
