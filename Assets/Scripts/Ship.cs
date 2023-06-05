@@ -26,6 +26,9 @@ public class Ship : MonoBehaviour
     
     public Boolean[] wantedCharacters = new bool[Character._allCharacters.Count];
     public Sprite[] _imageCharacters = new Sprite[4];
+
+    public AudioSource buttonClickAudioSource;
+    public AudioClip buttonClickedClip;
     public int foodStored
 
     {
@@ -79,6 +82,7 @@ public class Ship : MonoBehaviour
     }
 
     private void ActiveCharacterClicked(ESkill skill) {
+        
         activeSkills[(int)skill] = !activeSkills[(int)skill];
         
         if(skill == ESkill.STREAM_SKIP && activeSkills[(int)skill]) {
@@ -87,6 +91,7 @@ public class Ship : MonoBehaviour
             foodConsumption -= 1;
         }
         
+        buttonClickAudioSource.PlayOneShot(buttonClickedClip, 1.0f);
         ActiveCharacterEventManager.CharacterPlayingField(skill);
     }
     
@@ -103,12 +108,14 @@ public class Ship : MonoBehaviour
         var hades = parent.transform.GetComponent<HadesScriptkekw>();
         hades.isHades = c.Skill == ESkill.DEATH_SKIP;
         
+        buttonClickAudioSource.PlayOneShot(buttonClickedClip, 1.0f);
         if (c.Skill == ESkill.STREAM_SKIP || c.Skill == ESkill.GET_HEALTH) {
             btn.onClick.AddListener( () => {
                 panel.gameObject.SetActive(!panel.gameObject.activeSelf);
                 ActiveCharacterEventManager.CharacterClicked(c.Skill);
             });
         } else {
+            panel.gameObject.SetActive(true);
             btn.enabled = false;
         }
     }
