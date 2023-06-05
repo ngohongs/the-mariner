@@ -127,8 +127,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.4
-  m_fontSizeBase: 10.4
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -240,6 +240,8 @@ MonoBehaviour:
   soundEffect: {fileID: 4031438457044752237}
   foodAmount: 8
   textOverlay: {fileID: 3801679406130908074}
+  bonus: 30
+  diceSize: 3
 --- !u!82 &4031438457044752237
 AudioSource:
   m_ObjectHideFlags: 0
