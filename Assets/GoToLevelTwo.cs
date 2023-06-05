@@ -16,6 +16,8 @@ public class GoToLevelTwo : MonoBehaviour
 
     private void Start()
     {
+        levelSelect = GameObject.Find("LeveSelectScreen");
+        canvasGroup = levelSelect.transform.GetChild(0).gameObject.GetComponent<CanvasGroup>();
         levelSelect.SetActive(false);
     }
 
@@ -31,8 +33,7 @@ public class GoToLevelTwo : MonoBehaviour
         SceneManager.LoadScene("Talk2");
     }
     public void GoToMainMenu()
-    {
-        
+    { 
         levelSelect.SetActive(false);
     }
     public void GoToLevelSelect()

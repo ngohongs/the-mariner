@@ -15,6 +15,10 @@ public class MoveTile : MonoBehaviour
 
     private bool _middle = false;
 
+    private AudioSource sound;
+
+    private bool hovering = false;
+
     public bool middle
     {
         get { return _middle; }
@@ -40,11 +44,17 @@ public class MoveTile : MonoBehaviour
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
+        sound = transform.parent.GetComponent<AudioSource>();
     }
 
     private void OnMouseOver()
     {
         renderer.material = _blocked ? noWaySelect : select;
+        if (!hovering )
+        {
+            sound.PlayOneShot(sound.clip);
+        }
+        hovering = true; 
     }
 
     private void OnMouseExit()
@@ -55,5 +65,6 @@ public class MoveTile : MonoBehaviour
             return;
         }
         renderer.material = _blocked ? noWay : empty;
+        hovering = false;
     }
 }
