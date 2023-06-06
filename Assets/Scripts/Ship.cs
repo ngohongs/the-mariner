@@ -79,6 +79,7 @@ public class Ship : MonoBehaviour
     }
 
     private void ActiveCharacterClicked(ESkill skill) {
+        Debug.Log("S " + skill.ToString() + " " + this);
         activeSkills[(int)skill] = !activeSkills[(int)skill];
         
         if(skill == ESkill.STREAM_SKIP && activeSkills[(int)skill]) {
@@ -107,7 +108,7 @@ public class Ship : MonoBehaviour
         if (c.Skill == ESkill.STREAM_SKIP || c.Skill == ESkill.GET_HEALTH) {
             btn.onClick.AddListener( () => {
                 panel.gameObject.SetActive(!panel.gameObject.activeSelf);
-                ActiveCharacterEventManager.CharacterClicked(c.Skill);
+                ToggleCharacter(c);
             });
         } else {
             panel.gameObject.SetActive(true);
@@ -128,6 +129,31 @@ public class Ship : MonoBehaviour
             
             ActiveCharacterEventManager.CharacterAdded(c);
         }
+    }
+
+    public void ToggleCharacter(Character c)
+    {
+        var skill = c.Skill;
+        Debug.Log("S " + skill.ToString() + " " + this);
+        activeSkills[(int)skill] = !activeSkills[(int)skill];
+
+        if (skill == ESkill.STREAM_SKIP && activeSkills[(int)skill])
+        {
+            foodConsumption += 3;
+        }
+        else if (skill == ESkill.STREAM_SKIP && !activeSkills[(int)skill])
+        {
+            foodConsumption -= 3;
+        }
+
+        if (skill == ESkill.GET_HEALTH)
+        {
+            var moves = field.UpdateMoveSet();
+            field.moveSetDisplayer.Show(moves);
+        }
+
+        field.clickOnTile.PlayOneShot(field.clickOnTile.clip);
+        ActiveCharacterEventManager.CharacterPlayingField(skill);
     }
 
     private void ShipRessurected() {
