@@ -86,7 +86,8 @@ public class Ship : MonoBehaviour
         } else if(skill == ESkill.STREAM_SKIP && !activeSkills[(int)skill]) {
             foodConsumption -= 3;
         }
-        
+
+        field.clickOnTile.PlayOneShot(field.clickOnTile.clip);
         ActiveCharacterEventManager.CharacterPlayingField(skill);
     }
     
@@ -102,13 +103,14 @@ public class Ship : MonoBehaviour
 
         var hades = parent.transform.GetComponent<HadesScriptkekw>();
         hades.isHades = c.Skill == ESkill.DEATH_SKIP;
-        
+        field.clickOnTile.PlayOneShot(field.clickOnTile.clip);
         if (c.Skill == ESkill.STREAM_SKIP || c.Skill == ESkill.GET_HEALTH) {
             btn.onClick.AddListener( () => {
                 panel.gameObject.SetActive(!panel.gameObject.activeSelf);
                 ActiveCharacterEventManager.CharacterClicked(c.Skill);
             });
         } else {
+            panel.gameObject.SetActive(true);
             btn.enabled = false;
         }
     }

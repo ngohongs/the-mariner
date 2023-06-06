@@ -70,7 +70,7 @@ public class PlayingField : MonoBehaviour
 
     public float transitionTime = 3;
 
-    [SerializeField] private AudioSource clickOnTile;
+    public AudioSource clickOnTile;
 
     public static Action OnEndingEvent;
     
