@@ -70,10 +70,11 @@ public class GameController : MonoBehaviour
             uIContoller.HideElement("Main Menu");
         }
 
+        bool isLevel1 = name.Equals("Level1");
         bool isLevel = name.ToLower().Contains("level");
         bool isTalk = name.ToLower().Contains("talk");
 
-        if (isLevel)
+        if (isLevel && !isLevel1)
         {
             uIContoller.ShowElement("Food");
             uIContoller.ShowElement("Diary Button");
