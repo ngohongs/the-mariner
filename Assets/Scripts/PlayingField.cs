@@ -126,7 +126,7 @@ public class PlayingField : MonoBehaviour
 
         foreach (var tile in tilemap.map)
         {
-            tile.gameObject.SetActive(false);
+            tile.Hide();
         }
 
         for (int x = 0; x < playingWidth; x++)
@@ -136,7 +136,7 @@ public class PlayingField : MonoBehaviour
                 var tile = TileIn(x, y);
                 if (tile)
                 {
-                    tile.gameObject.SetActive(true);
+                    tile.Show();
                 }
             }
         }
@@ -420,7 +420,7 @@ public class PlayingField : MonoBehaviour
         for (int x = 0; x < tilemap.width; x++)
         {        
             var tile = TileIn(x, 0);
-            tile.transform.DOLocalMoveY(-drop, shiftDuration).OnComplete(() => tile.gameObject.SetActive(false));
+            tile.transform.DOLocalMoveY(-drop, shiftDuration).OnComplete(() => tile.Hide());
         }
         for (int x = 0; x < tilemap.width; x++)
         {
@@ -429,7 +429,7 @@ public class PlayingField : MonoBehaviour
             if (tile == null)
                 continue;
 
-            tile.gameObject.SetActive(true);
+            tile.Show();
             tile.transform.DOLocalMoveY(0, shiftDuration).From(drop);
         }
         completed++;

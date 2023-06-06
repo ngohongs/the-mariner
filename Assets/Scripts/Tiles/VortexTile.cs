@@ -21,4 +21,14 @@ public class VortexTile : Tile
     {
         return (Direction) Random.Range(0, (int)Direction.DownRight);
     }
+
+    public override void Hide()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    public override void Show()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
 }

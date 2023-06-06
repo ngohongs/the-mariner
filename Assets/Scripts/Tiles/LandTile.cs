@@ -33,4 +33,16 @@ public class LandTile : Tile
 
         return false;
     }
+
+    public override void Hide()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public override void Show()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
+    }
 }

@@ -72,4 +72,8 @@ public abstract class Tile : MonoBehaviour
     public virtual bool IsMoveable(Ship ship) => true;
 
     public AudioSource soundEffect;
+
+    public abstract void Hide();
+
+    public abstract void Show();
 }

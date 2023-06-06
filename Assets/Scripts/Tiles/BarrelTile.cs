@@ -17,6 +17,7 @@ public class BarrelTile : Tile
 
 
     private void TriggerOverlay(Character c) {
+        Debug.Log("Chef " + gameObject.name);
         if (eaten)
         {
             return;
@@ -66,4 +67,17 @@ public class BarrelTile : Tile
         transform.GetChild(0).gameObject.SetActive(false);
         return false;
     }
+
+    public override void Hide()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    public override void Show()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
+    }
 }
+
