@@ -12,7 +12,7 @@ public class Character {
             "The Chef",
             ESkill.CHEF,
             "",
-            "The Chef is a great cook with a keen sense for spotting barrels with extra food. He'll sometimes share her finds with you! (Passive)"
+            "The Chef is a great cook with a keen sense for spotting barrels with extra food. He'll share his observations! (Passive)"
         ),
         new Character(
             "Machio-san",
