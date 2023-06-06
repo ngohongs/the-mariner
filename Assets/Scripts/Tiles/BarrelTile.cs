@@ -17,6 +17,10 @@ public class BarrelTile : Tile
 
 
     private void TriggerOverlay(Character c) {
+        if (eaten)
+        {
+            return;
+        }
         if (c.Skill == ESkill.CHEF) {
             _textOverlayText = textOverlay.GetComponent<TMP_Text>();
             int change = Random.Range(0, diceSize);
@@ -31,6 +35,11 @@ public class BarrelTile : Tile
 
     private void OnEnable() {
         ActiveCharacterEventManager.OnCharacterAdded += TriggerOverlay;
+    }
+
+    private void OnDisable()
+    {
+        ActiveCharacterEventManager.OnCharacterAdded -= TriggerOverlay;
     }
 
     private void Awake()
