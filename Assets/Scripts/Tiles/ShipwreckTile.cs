@@ -12,6 +12,12 @@ public class ShipwreckTile : Tile
     }
 
     public override bool ApplyEffect(PlayingField field, out bool wait) {
+        if (!field.IsInPlayingField(field.shipX, field.shipY - 1) ||
+            !field.IsInTilemap(field.shipX, field.shipY - 1))
+        {
+            wait = false;
+            return false;
+        }
         DialogManager.TriggerShipwreckStep();
         field.tilemap.Replace(x, y, TileType.Empty);
         wait = false;
