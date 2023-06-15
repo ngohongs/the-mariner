@@ -320,6 +320,7 @@ public class PlayingField : MonoBehaviour
         {
             OnEndingEvent?.Invoke();
             StartCoroutine(WaitAndSetFade());
+            yield break;
             // GameController.instance.NextScene();
         }
 

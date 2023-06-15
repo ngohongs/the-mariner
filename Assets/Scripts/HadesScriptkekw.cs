@@ -9,6 +9,16 @@ public class HadesScriptkekw : MonoBehaviour {
         Ship.OnShipRessurected += JustDeleteTheVec;
     }
 
+    private void OnDisable()
+    {
+        Ship.OnShipRessurected -= JustDeleteTheVec;
+    }
+
+    private void OnDestroy()
+    {
+        Ship.OnShipRessurected -= JustDeleteTheVec;
+    }
+
     private void JustDeleteTheVec() {
         if(isHades)
             Destroy(transform.gameObject);

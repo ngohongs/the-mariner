@@ -24,7 +24,7 @@ public class Character {
             "Hades",
             ESkill.DEATH_SKIP,
             "",
-            "Hades is a master of resurrection. He will bring you back to life, but only once. (Passive)"
+            "Hades is a master of resurrection. He will bring you back to life when you get out of bounds, but only once. (Passive)"
         ),
         new Character(
             "The Diplomat",
