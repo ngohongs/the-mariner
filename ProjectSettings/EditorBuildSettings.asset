@@ -24,9 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level3.unity
     guid: 55f4148a4b3d8e24aac1029428fda5d6
   - enabled: 1
-    path: Assets/Scenes/Talk3.unity
-    guid: c468eb95f40565747b8c1998e6f5c931
-  - enabled: 1
     path: Assets/Scenes/EndingScene.unity
     guid: abd49853e08c4dd40aff732522cc4edf
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
