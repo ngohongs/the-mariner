@@ -72,7 +72,8 @@ public class BarrelTile : Tile
     {
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
-        transform.GetChild(2).gameObject.SetActive(false);
+        if (transform.childCount == 3)
+            transform.GetChild(2).gameObject.SetActive(false);
     }
 
     public override void Show()
